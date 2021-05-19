@@ -4,7 +4,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 function component() {
     const element = document.createElement('div');
 
-    element.innerHTML = `<form></form>`;
+    element.innerHTML = `Hi!`;
 
     return element;
 }
