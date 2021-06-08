@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import 'bootstrap/dist/js/bootstrap.js'
 import validate from './validator.js'
+import getRSS from './rssLoader.js'
+
 
 const getComponent = () => {
     const element = document.createElement('div');
@@ -23,9 +25,18 @@ document.body.appendChild(component);
 
 const form = document.getElementsByClassName('form-control')[0];
 
-form.addEventListener('input', (e) => validate(e.target.value));
+let isValid;
+let url;
 
-// form.addEventListener('input', (e) => validate(e));
+form.addEventListener('input', (e) => {
+    url = e.target.value;
+    isValid = validate(url);
+});
 
-console.log(form);
+if (isValid === true) {
+    const content = getRSS(url);
+    console.log(content);
+}
+
+
 

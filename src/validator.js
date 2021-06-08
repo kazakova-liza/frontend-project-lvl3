@@ -1,13 +1,5 @@
 import * as yup from 'yup'
 
-// let schema = yup.object().shape({
-//     url: yup.string().required().url(),
-// });
-
-// let schema = yup.object().shape({
-//     url: yup.string().url(),
-// });
-
 let schema = yup.string().url();
 
 
