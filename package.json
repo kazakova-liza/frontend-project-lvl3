@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/kazakova-liza/frontend-project-lvl3#readme",
   "dependencies": {
+    "@babel/core": "^7.14.3",
+    "@popperjs/core": "^2.9.2",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "bootstrap": "^5.0.1",
     "eslint": "^7.26.0",
@@ -24,17 +27,18 @@
     "eslint-plugin-import": "^2.23.2",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "exports-loader": "^3.0.0",
-    "html-webpack-plugin": "^5.3.1",
+    "html-webpack-plugin": "^2.5.0",
     "postcss": "^8.2.15",
     "postcss-loader": "^5.3.0",
     "sass": "^1.32.13",
     "sass-loader": "^11.1.1",
-    "webpack": "^5.37.0",
+    "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^1.16.5"
   }
 }
