@@ -31,12 +31,13 @@ let url;
 form.addEventListener('input', (e) => {
     url = e.target.value;
     isValid = validate(url);
+    if (isValid === true) {
+        const content = getRSS(url);
+        console.log(content);
+    }
 });
 
-if (isValid === true) {
-    const content = getRSS(url);
-    console.log(content);
-}
+
 
 
 

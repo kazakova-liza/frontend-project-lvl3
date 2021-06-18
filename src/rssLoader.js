@@ -2,8 +2,14 @@
 import axios from 'axios'
 
 
+const getProxyUrl = (url) => {
+    return `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(url)}`;
+}
+
+
 const getRSS = (url) => {
-    const content = axios.get(url)
+    const proxyUrl = getProxyUrl(url);
+    const content = axios.get(proxyUrl)
         .then(function (response) {
             console.log(response);
             return response;
