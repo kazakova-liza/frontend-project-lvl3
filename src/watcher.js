@@ -1,10 +1,12 @@
 import onChange from 'on-change'
 
-let isValid;
+let object = {
+    valid: false
+};
 
 const onIsValidChange = () => {
     const button = document.getElementsByClassName('btn-primary')[0];
-    if (validity === true) {
+    if (isValid.valid === true) {
         button.disabled = false;
     }
     else {
@@ -12,6 +14,6 @@ const onIsValidChange = () => {
     }
 }
 
-const validity = onChange(isValid, onIsValidChange);
+const isValid = onChange(object, onIsValidChange);
 
-export default validity;
+export default isValid;

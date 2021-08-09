@@ -1,13 +1,13 @@
 import _ from 'lodash'
 import 'bootstrap/dist/js/bootstrap.js'
-// import validate from './validator.js'
-// import getRSS from './rssLoader.js'
-// import parse from './parser.js'
-// import feeds from './feeds.js'
-// import vailidity from './watcher.js'
+import validate from './validator.js'
+import getRSS from './rssLoader.js'
+import parse from './parser.js'
+import feeds from './feeds.js'
+import isValid from './watcher.js'
 
 
-// let url;
+let url;
 
 const getComponent = () => {
     const element = document.createElement('div');
@@ -23,33 +23,33 @@ const getComponent = () => {
     return element;
 }
 
-// const component = getComponent();
+const component = getComponent();
 
-// document.body.appendChild(component);
+document.body.appendChild(component);
 
-// const form = document.getElementsByClassName('form-control')[0];
+const form = document.getElementsByClassName('form-control')[0];
 
 
-// form.addEventListener('input', (e) => {
-//     url = e.target.value;
-//     validate(url).then((valid) => {
-//         if (valid === true) {
-//             if (feeds.includes(url)) {
-//                 // vailidity = false;
-//             }
-//             else {
-//                 // vailidity = true;
-//                 const content = getRSS(url);
-//                 content.then((xmlString) => {
-//                     const parsedRSS = parse(xmlString);
-//                     console.log(parsedRSS.documentElement.textContent);
-//                 })
-//             }
-//         }
-//         else {
-//             // vailidity = false;
-//         }
-//     });
-// });
+form.addEventListener('input', (e) => {
+    url = e.target.value;
+    validate(url).then((valid) => {
+        if (valid === true) {
+            if (feeds.includes(url)) {
+                isValid.valid = false;
+            }
+            else {
+                isValid.valid = true;
+                const content = getRSS(url);
+                content.then((xmlString) => {
+                    const parsedRSS = parse(xmlString);
+                    console.log(parsedRSS.documentElement.textContent);
+                })
+            }
+        }
+        else {
+            isValid.valid = false;
+        }
+    });
+});
 
 
