@@ -12,14 +12,11 @@ const getRSS = (url) => {
     const content = axios.get(proxyUrl)
         .then(function (response) {
             console.log(response);
-            return response;
+            return response; //data/contents
         })
         .catch(function (error) {
             console.log(error);
         })
-    // .then(function () {
-    //     // always executed
-    // });
     return content;
 }
 

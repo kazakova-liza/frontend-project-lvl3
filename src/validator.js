@@ -4,12 +4,8 @@ let schema = yup.string().url();
 
 
 const validate = (data) => {
-    schema
-        .isValid(data)
-        .then(function (valid) {
-            valid; // => true
-            console.log(valid);
-        });
+    const isValid = schema.isValid(data);
+    return isValid;
 }
 
 export default validate;
