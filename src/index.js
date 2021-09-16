@@ -4,7 +4,7 @@ import validate from './validator.js'
 import getRSS from './rssLoader.js'
 import parse from './parser.js'
 import feeds from './feeds.js'
-import isValid from './watcher.js'
+import result from './view.js'
 
 
 let url;
@@ -12,11 +12,14 @@ let url;
 const getComponent = () => {
     const element = document.createElement('div');
 
-    element.innerHTML = `<form>
+    element.innerHTML = `<form novalidate>
         <div class="form-group">
             <label for="rssInput">RSS stream</label>
             <input class="form-control" id="rssInput" type="url" required autofocus aria-label='url' placeholder="Enter url">
-            <button type="submit" class="btn btn-primary" disabled>Add</button>
+            <button type="submit" class="btn btn-primary">Add</button>
+            <div class="invalid-feedback">
+            Please enter a valid URL.
+            </div>
         </div>
         </form>`;
 
@@ -28,17 +31,26 @@ const component = getComponent();
 document.body.appendChild(component);
 
 const form = document.getElementsByClassName('form-control')[0];
+const button = document.getElementsByClassName('btn-primary')[0];
 
+const state = {
+    valid: null,
+    errors: []
+}
 
-form.addEventListener('input', (e) => {
-    url = e.target.value;
+button.addEventListener('click', (event) => {
+    url = form.value;
     validate(url).then((valid) => {
         if (valid === true) {
             if (feeds.includes(url)) {
-                isValid.valid = false;
+                event.preventDefault();
+                event.stopPropagation();
+                result.valid = false;
+                // form.classList.add('is-invalid');
             }
             else {
-                isValid.valid = true;
+                result.valid = true;
+                // form.classList.add('is-valid');
                 const content = getRSS(url);
                 content.then((xmlString) => {
                     const parsedRSS = parse(xmlString);
@@ -47,8 +59,13 @@ form.addEventListener('input', (e) => {
             }
         }
         else {
-            isValid.valid = false;
+            event.preventDefault();
+            event.stopPropagation();
+            // form.classList.add('is-invalid');
+            result.valid = false;
+            form.valid = false;
         }
+        form.classList.add('was-validated');
     });
 });
 

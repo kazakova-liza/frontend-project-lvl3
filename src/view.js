@@ -4,9 +4,9 @@ let object = {
     valid: false
 };
 
-const onIsValidChange = () => {
+const render = (state) => {
     const button = document.getElementsByClassName('btn-primary')[0];
-    if (isValid.valid === true) {
+    if (result.valid === true) {
         button.disabled = false;
     }
     else {
@@ -14,6 +14,7 @@ const onIsValidChange = () => {
     }
 }
 
-const isValid = onChange(object, onIsValidChange);
+const result = onChange(object, render);
 
-export default isValid;
+
+export default result;
