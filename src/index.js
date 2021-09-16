@@ -15,7 +15,7 @@ const getComponent = () => {
     element.innerHTML = `<form novalidate>
         <div class="form-group">
             <label for="rssInput">RSS stream</label>
-            <input class="form-control" id="rssInput" type="url" required autofocus aria-label='url' placeholder="Enter url">
+            <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
             <button type="submit" class="btn btn-primary">Add</button>
             <div class="invalid-feedback">
             Please enter a valid URL.
@@ -40,33 +40,34 @@ const state = {
 
 button.addEventListener('click', (event) => {
     url = form.value;
-    validate(url).then((valid) => {
-        if (valid === true) {
-            if (feeds.includes(url)) {
-                event.preventDefault();
-                event.stopPropagation();
-                result.valid = false;
-                // form.classList.add('is-invalid');
-            }
-            else {
-                result.valid = true;
-                // form.classList.add('is-valid');
-                const content = getRSS(url);
-                content.then((xmlString) => {
-                    const parsedRSS = parse(xmlString);
-                    console.log(parsedRSS.documentElement.textContent);
-                })
-            }
-        }
-        else {
+    validate(url).then(() => {
+        if (feeds.includes(url)) {
             event.preventDefault();
             event.stopPropagation();
+            state.valid = false;
+            state.errors.push('This feed already exists');
             // form.classList.add('is-invalid');
-            result.valid = false;
-            form.valid = false;
         }
+        else {
+            state.valid = true;
+            // form.classList.add('is-valid');
+            const content = getRSS(url);
+            content.then((xmlString) => {
+                const parsedRSS = parse(xmlString);
+                console.log(parsedRSS.documentElement.textContent);
+            })
+        }
+    }).catch((err) => {
+        event.preventDefault();
+        event.stopPropagation();
+        // form.classList.add('is-invalid');
+        state.valid = false;
+        state.errors.push(...err.errors);
+        console.log(state);
+        form.valid = false;
         form.classList.add('was-validated');
     });
+
 });
 
 
