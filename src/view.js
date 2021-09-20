@@ -1,20 +1,19 @@
 import onChange from 'on-change'
-
-let object = {
-    valid: false
-};
+import { state } from './index.js'
 
 const render = (state) => {
-    const button = document.getElementsByClassName('btn-primary')[0];
-    if (result.valid === true) {
-        button.disabled = false;
+    const form = document.getElementsByClassName('form-control')[0];
+    const feedback = document.getElementsByClassName('invalid-feedback')[0];
+    if (state.valid) {
+        form.classList.add('is-valid');
     }
     else {
-        button.disabled = true;
+        form.classList.add('is-invalid');
+        feedback.textContent = state.error;
     }
+    form.classList.add('was-validated');
 }
 
-const result = onChange(object, render);
+onChange(state, render(state));
 
 
-export default result;
