@@ -3,14 +3,18 @@ import validate from './validator.js'
 import getRSS from './rssLoader.js'
 import parse from './parser.js'
 import feeds from './feeds.js'
+import onChange from 'on-change'
+import render from './view.js'
 
 
 let url;
 
-export let state = {
+let state = {
     valid: null,
     error: ''
 }
+
+const watchedState = onChange(state, (path, value) => render(path, value));
 
 const getComponent = () => {
     const element = document.createElement('div');
@@ -43,11 +47,11 @@ button.addEventListener('click', (event) => {
         if (feeds.includes(url)) {
             event.preventDefault();
             event.stopPropagation();
-            state.valid = false;
-            state.errors = 'This feed already exists';
+            watchedState.valid = false;
+            watchedState.errors = 'This feed already exists';
         }
         else {
-            state.valid = true;
+            watchedState.valid = true;
             const content = getRSS(url);
             content.then((xmlString) => {
                 const parsedRSS = parse(xmlString);
@@ -57,8 +61,8 @@ button.addEventListener('click', (event) => {
     }).catch((err) => {
         event.preventDefault();
         event.stopPropagation();
-        state.valid = false;
-        state.error = err.errors[0];
+        watchedState.valid = false;
+        watchedState.error = err.errors[0];
         form.valid = false;
     });
 
