@@ -5,6 +5,9 @@ import parse from './parser.js'
 import feeds from './feeds.js'
 import onChange from 'on-change'
 import render from './view.js'
+import i18next from './messages.js'
+
+
 
 
 let url;
@@ -48,7 +51,7 @@ button.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopPropagation();
             watchedState.valid = false;
-            watchedState.errors = 'This feed already exists';
+            watchedState.errors = i18next.t('duplicate');
         }
         else {
             watchedState.valid = true;
