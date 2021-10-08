@@ -9,15 +9,7 @@ const getProxyUrl = (url) => {
 
 const getRSS = (url) => {
     const proxyUrl = getProxyUrl(url);
-    const content = axios.get(proxyUrl)
-        .then(function (response) {
-            console.log(response);
-            return response; //data/contents
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-    return content;
+    return axios.get(proxyUrl);
 }
 
 export default getRSS;

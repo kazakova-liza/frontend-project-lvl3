@@ -8,8 +8,6 @@ import render from './view.js'
 import i18next from './messages.js'
 
 
-
-
 let url;
 
 let state = {
@@ -45,27 +43,29 @@ const button = document.getElementsByClassName('btn-primary')[0];
 
 
 button.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     url = form.value;
     validate(url).then(() => {
         if (feeds.includes(url)) {
-            event.preventDefault();
-            event.stopPropagation();
+
             watchedState.valid = false;
             watchedState.errors = i18next.t('duplicate');
         }
         else {
             watchedState.valid = true;
-            const content = getRSS(url);
-            content.then((xmlString) => {
-                const parsedRSS = parse(xmlString);
-                console.log(parsedRSS.documentElement.textContent);
+            getRSS(url).then((response) => {
+                console.log(`Received RSS response: ${JSON.stringify(response)}`)
+                const parsedRSS = parse(response.data.contents);
+                console.log(`RSS parsed: ${JSON.stringify(parsedRSS)}`)
+                console.log(`parsedRSS.documentElement.textContent: ${
+                    .documentElement.textContent}`);
             })
         }
     }).catch((err) => {
-        event.preventDefault();
-        event.stopPropagation();
+        console.log(`Error getting RSS: ${err}`);
         watchedState.valid = false;
-        watchedState.error = err.errors[0];
+        // watchedState.error = err.errors[0];
         form.valid = false;
     });
 
