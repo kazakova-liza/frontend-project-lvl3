@@ -2,10 +2,11 @@ import 'bootstrap/dist/js/bootstrap.js'
 import validate from './validator.js'
 import getRSS from './rssLoader.js'
 import parse from './parser.js'
-import feeds from './feeds.js'
+import { feeds } from './store.js'
 import onChange from 'on-change'
 import render from './view.js'
 import i18next from './messages.js'
+import saveRSS from './saver.js'
 
 
 let url;
@@ -47,8 +48,7 @@ button.addEventListener('click', (event) => {
     event.stopPropagation();
     url = form.value;
     validate(url).then(() => {
-        if (feeds.includes(url)) {
-
+        if (feeds.length !== 0) {
             watchedState.valid = false;
             watchedState.errors = i18next.t('duplicate');
         }
@@ -57,15 +57,14 @@ button.addEventListener('click', (event) => {
             getRSS(url).then((response) => {
                 console.log(`Received RSS response: ${JSON.stringify(response)}`)
                 const parsedRSS = parse(response.data.contents);
-                console.log(`RSS parsed: ${JSON.stringify(parsedRSS)}`)
-                console.log(`parsedRSS.documentElement.textContent: ${
-                    .documentElement.textContent}`);
+                saveRSS(parsedRSS, url);
+
             })
         }
     }).catch((err) => {
         console.log(`Error getting RSS: ${err}`);
         watchedState.valid = false;
-        // watchedState.error = err.errors[0];
+        watchedState.error = err.errors[0];
         form.valid = false;
     });
 
