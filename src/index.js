@@ -13,24 +13,36 @@ let url;
 
 let state = {
     valid: null,
-    error: ''
+    error: '',
+    feeds: [],
+    posts: []
 }
 
-const watchedState = onChange(state, (path, value) => render(path, value));
+export const watchedState = onChange(state, (path, value) => render(path, value));
 
 const getComponent = () => {
     const element = document.createElement('div');
 
-    element.innerHTML = `<form novalidate>
-        <div class="form-group">
-            <label for="rssInput">RSS stream</label>
-            <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
-            <button type="submit" class="btn btn-primary">Add</button>
-            <div class="invalid-feedback">
-            ${state.error}
+    element.innerHTML = `
+    <div>
+        <form novalidate>
+            <div class="form-group">
+                <label for="rssInput">RSS stream</label>
+                <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
+                <button type="submit" class="btn btn-primary">Add</button>
+                <div class="invalid-feedback">
+                ${state.error}
+                </div>
             </div>
+        </form>
+        <div class='feeds'>
+        <h1>Feeds</h1>
         </div>
-        </form>`;
+        <div class='posts'>
+        <h1>Posts</h1>
+        </div>
+
+    </div>`;
 
     return element;
 }
@@ -50,10 +62,11 @@ button.addEventListener('click', (event) => {
     validate(url).then(() => {
         if (feeds.length !== 0) {
             watchedState.valid = false;
-            watchedState.errors = i18next.t('duplicate');
+            watchedState.error = i18next.t('duplicate');
         }
         else {
             watchedState.valid = true;
+            watchedState.error = '';
             getRSS(url).then((response) => {
                 console.log(`Received RSS response: ${JSON.stringify(response)}`)
                 const parsedRSS = parse(response.data.contents);
@@ -69,5 +82,7 @@ button.addEventListener('click', (event) => {
     });
 
 });
+
+
 
 
