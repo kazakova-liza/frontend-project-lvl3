@@ -54,34 +54,50 @@ document.body.appendChild(component);
 const form = document.getElementsByClassName('form-control')[0];
 const button = document.getElementsByClassName('btn-primary')[0];
 
+const processRss = (url, newFlag) => {
+    validate(url).then(() => {
+        if (newFlag) {
+            if (feeds.find((feed) => feed.url === url) !== undefined) {
+                throw (i18next.t('duplicate'));
+            }
+
+        }
+        watchedState.valid = true;
+        watchedState.error = '';
+        getRSS(url).then((response) => {
+            const parsedRSS = parse(response.data.contents);
+            saveRSS(parsedRSS, url, newFlag);
+
+        })
+    }).catch((err) => {
+        watchedState.valid = false;
+        form.valid = false;
+        if (err.errors != undefined) {
+            watchedState.error = err.errors[0];
+        }
+        watchedState.error = err;
+
+    });
+}
+
+const updateRss = () => {
+    if (feeds.length !== 0) {
+        feeds.map((feed) => {
+            processRss(feed.url, false);
+        });
+    }
+    setTimeout(updateRss, 5000);
+}
+
 
 button.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
     url = form.value;
-    validate(url).then(() => {
-        if (feeds.length !== 0) {
-            watchedState.valid = false;
-            watchedState.error = i18next.t('duplicate');
-        }
-        else {
-            watchedState.valid = true;
-            watchedState.error = '';
-            getRSS(url).then((response) => {
-                console.log(`Received RSS response: ${JSON.stringify(response)}`)
-                const parsedRSS = parse(response.data.contents);
-                saveRSS(parsedRSS, url);
-
-            })
-        }
-    }).catch((err) => {
-        console.log(`Error getting RSS: ${err}`);
-        watchedState.valid = false;
-        watchedState.error = err.errors[0];
-        form.valid = false;
-    });
-
+    processRss(url, true);
 });
+
+setTimeout(updateRss, 5000);
 
 
 
