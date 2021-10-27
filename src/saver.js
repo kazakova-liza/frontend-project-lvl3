@@ -1,6 +1,6 @@
 import getId from './idGenerator.js'
 import { feeds, streams } from './store.js'
-import { watchedState } from './index.js'
+import { watchedState, updateRss } from './index.js'
 
 const saveRSS = (RSS, url, newFlag) => {
     let id;
@@ -29,22 +29,26 @@ const saveRSS = (RSS, url, newFlag) => {
         const stream = {
             id,
             title,
-            link
+            link,
+            viewed: false
         }
 
         if (newFlag) {
             streams.push(stream);
-            watchedState.posts = [...streams];
+
         }
         else {
             const thisStream = existingPosts.find((stream) => stream.title === title);
             if (thisStream === undefined) {
                 streams.push(stream)
-                watchedState.posts = [...streams];
             }
         }
 
     })
+    watchedState.posts = [...streams];
+    if (newFlag) {
+        updateRss(url);
+    }
 }
 
 export default saveRSS;

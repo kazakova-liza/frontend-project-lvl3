@@ -1,4 +1,6 @@
 import 'bootstrap/dist/js/bootstrap.js'
+import bootstrap from 'bootstrap'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import validate from './validator.js'
 import getRSS from './rssLoader.js'
 import parse from './parser.js'
@@ -35,11 +37,27 @@ const getComponent = () => {
                 </div>
             </div>
         </form>
-        <div class='feeds'>
         <h1>Feeds</h1>
+        <div class='feeds'>
         </div>
-        <div class='posts'>
         <h1>Posts</h1>
+        <div class='posts'>
+        </div>
+        <div class="modal fade" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
 
     </div>`;
@@ -52,7 +70,9 @@ const component = getComponent();
 document.body.appendChild(component);
 
 const form = document.getElementsByClassName('form-control')[0];
-const button = document.getElementsByClassName('btn-primary')[0];
+const addButton = document.getElementsByClassName('btn-primary')[0];
+const viewButtons = document.getElementsByClassName('btn-view');
+const modal = document.getElementById('myModal')
 
 const processRss = (url, newFlag) => {
     validate(url).then(() => {
@@ -67,7 +87,6 @@ const processRss = (url, newFlag) => {
         getRSS(url).then((response) => {
             const parsedRSS = parse(response.data.contents);
             saveRSS(parsedRSS, url, newFlag);
-
         })
     }).catch((err) => {
         watchedState.valid = false;
@@ -80,24 +99,29 @@ const processRss = (url, newFlag) => {
     });
 }
 
-const updateRss = () => {
-    if (feeds.length !== 0) {
-        feeds.map((feed) => {
-            processRss(feed.url, false);
-        });
-    }
-    setTimeout(updateRss, 5000);
+export const updateRss = (url) => {
+    processRss(url, false);
+    setTimeout(() => updateRss(url), 5000);
 }
 
 
-button.addEventListener('click', (event) => {
+addButton.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
     url = form.value;
     processRss(url, true);
 });
 
-setTimeout(updateRss, 5000);
+[...viewButtons].map((button) => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        id = event.value.id;
+
+    });
+})
+
+
 
 
 

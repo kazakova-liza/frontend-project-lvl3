@@ -1,4 +1,7 @@
 
+import removeAllChildNodes from './utils.js'
+import { streams } from './store.js'
+
 const render = (path, value, previousValue, applyData) => {
     const form = document.getElementsByClassName('form-control')[0];
     const feedback = document.getElementsByClassName('invalid-feedback')[0];
@@ -16,8 +19,10 @@ const render = (path, value, previousValue, applyData) => {
         feedback.textContent = value;
     }
     if (path === 'feeds') {
+        removeAllChildNodes(feeds);
         value.map((item) => {
             const feed = document.createElement('ul');
+            feed.className = 'feed';
             const title = document.createElement('h3');
             title.textContent = item.title;
             const description = document.createElement('i');
@@ -28,13 +33,26 @@ const render = (path, value, previousValue, applyData) => {
         })
     }
     if (path === 'posts') {
+        removeAllChildNodes(posts);
         value.map((item) => {
+            const list = document.createElement('li');
+            list.className = 'justify-content-between';
             const post = document.createElement('a');
+            post.className = 'fw-bold';
             post.href = item.link;
             post.textContent = item.title;
-            posts.appendChild(post);
+
+            const button = document.createElement('button');
+            button.textContent = 'View';
+            button.className = 'btn-view';
+            const thisPost = streams.find((stream) => stream.title === item.title);
+            button.id = thisPost.id;
+
+            list.appendChild(post);
+            list.appendChild(button);
             const divider = document.createElement('br');
-            posts.appendChild(divider);
+            list.appendChild(divider);
+            posts.appendChild(list);
         })
     }
 
