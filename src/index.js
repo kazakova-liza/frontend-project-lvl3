@@ -1,6 +1,4 @@
-import 'bootstrap/dist/js/bootstrap.js'
-import bootstrap from 'bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css'
+
 import validate from './validator.js'
 import getRSS from './rssLoader.js'
 import parse from './parser.js'
@@ -9,6 +7,7 @@ import onChange from 'on-change'
 import render from './view.js'
 import i18next from './messages.js'
 import saveRSS from './saver.js'
+import addBootstrap from './bootstrap/addBootsrap.js'
 
 
 let url;
@@ -21,6 +20,10 @@ let state = {
 }
 
 export const watchedState = onChange(state, (path, value) => render(path, value));
+
+addBootstrap();
+
+
 
 const getComponent = () => {
     const element = document.createElement('div');
@@ -71,8 +74,8 @@ document.body.appendChild(component);
 
 const form = document.getElementsByClassName('form-control')[0];
 const addButton = document.getElementsByClassName('btn-primary')[0];
-const viewButtons = document.getElementsByClassName('btn-view');
-const modal = document.getElementById('myModal')
+
+// const modal = document.getElementById('myModal')
 
 const processRss = (url, newFlag) => {
     validate(url).then(() => {
@@ -112,14 +115,22 @@ addButton.addEventListener('click', (event) => {
     processRss(url, true);
 });
 
-[...viewButtons].map((button) => {
-    button.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        id = event.value.id;
+if (state.posts.length > 0) {
+    const viewButtons = document.getElementsByClassName('btn-view');
+    [...viewButtons].map((button) => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            const id = event.value.id;
+            const thisPost = watchedState.posts.find((post) => post.id === id);
+            thisPost.viewed = true;
+            console.log(state.posts);
 
-    });
-})
+
+        });
+    })
+}
+
 
 
 

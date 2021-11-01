@@ -38,7 +38,7 @@ const render = (path, value, previousValue, applyData) => {
             const list = document.createElement('li');
             list.className = 'justify-content-between';
             const post = document.createElement('a');
-            post.className = 'fw-bold';
+            post.className = item.viewed ? 'fw-normal' : 'fw-bold';
             post.href = item.link;
             post.textContent = item.title;
 
