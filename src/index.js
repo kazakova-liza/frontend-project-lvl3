@@ -8,6 +8,7 @@ import render from './view.js'
 import i18next from './messages.js'
 import saveRSS from './saver.js'
 import addBootstrap from './bootstrap/addBootsrap.js'
+// import './App.css'
 
 
 let url;
@@ -16,7 +17,8 @@ let state = {
     valid: null,
     error: '',
     feeds: [],
-    posts: []
+    posts: [],
+    showModal: false
 }
 
 export const watchedState = onChange(state, (path, value) => render(path, value));
@@ -29,10 +31,10 @@ const getComponent = () => {
     const element = document.createElement('div');
 
     element.innerHTML = `
-    <div>
+    <div class='app'>
+        <h1>RSS stream</h1>
         <form novalidate>
             <div class="form-group">
-                <label for="rssInput">RSS stream</label>
                 <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
                 <button type="submit" class="btn btn-primary">Add</button>
                 <div class="invalid-feedback">

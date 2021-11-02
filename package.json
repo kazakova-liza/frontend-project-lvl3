@@ -33,6 +33,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "css-loader": "^6.5.0",
     "exports-loader": "^3.0.0",
     "html-webpack-plugin": "^5.3.1",
     "postcss": "^8.2.15",
