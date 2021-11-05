@@ -48,7 +48,7 @@ const getComponent = () => {
         <h1>Posts</h1>
         <div class='posts'>
         </div>
-        <div class="modal fade" >
+        <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

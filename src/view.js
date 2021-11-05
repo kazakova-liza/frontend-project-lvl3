@@ -2,6 +2,7 @@
 import removeAllChildNodes from './utils.js'
 import { streams } from './store.js'
 import { watchedState } from './index.js';
+import $ from "jquery";
 
 const render = (path, value, previousValue, applyData) => {
     const form = document.getElementsByClassName('form-control')[0];
@@ -46,22 +47,26 @@ const render = (path, value, previousValue, applyData) => {
             const button = document.createElement('button');
             button.textContent = 'View';
             button.className = 'btn-view';
+            button.dataTarget = "#previewModal";
+            button.dataToggle = 'modal';
             button.classList.add('btn-secondary');
             const thisPost = streams.find((stream) => stream.title === item.title);
             button.id = thisPost.id;
-            button.addEventListener('click', (event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                thisPost.viewed = true;
-                const modal = document.getElementsByClassName('modal')[0];
-                modal.classList.add('show');
-            });
-
             list.appendChild(post);
             list.appendChild(button);
+
+            button.addEventListener('click', (event) => {
+                // event.preventDefault();
+                // event.stopPropagation();
+                thisPost.viewed = true;
+                const modal = document.getElementsByClassName('modal')[0];
+
+                modal.classList.add('show');
+            });
             const divider = document.createElement('br');
             list.appendChild(divider);
             posts.appendChild(list);
+            $('#previewModal').modal('toggle');
         })
     }
 
