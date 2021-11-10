@@ -47,22 +47,22 @@ const render = (path, value, previousValue, applyData) => {
             const button = document.createElement('button');
             button.textContent = 'View';
             button.className = 'btn-view';
-            button.dataTarget = "#previewModal";
-            button.dataToggle = 'modal';
+            button.dataset.bsTarget = "#previewModal";
+            button.dataset.bsToggle = 'modal';
             button.classList.add('btn-secondary');
             const thisPost = streams.find((stream) => stream.title === item.title);
             button.id = thisPost.id;
             list.appendChild(post);
             list.appendChild(button);
 
-            button.addEventListener('click', (event) => {
-                // event.preventDefault();
-                // event.stopPropagation();
-                thisPost.viewed = true;
-                const modal = document.getElementsByClassName('modal')[0];
+            // button.addEventListener('click', (event) => {
+            //     // event.preventDefault();
+            //     // event.stopPropagation();
+            //     thisPost.viewed = true;
+            //     const modal = document.getElementsByClassName('modal')[0];
 
-                modal.classList.add('show');
-            });
+            //     modal.classList.add('show');
+            // });
             const divider = document.createElement('br');
             list.appendChild(divider);
             posts.appendChild(list);

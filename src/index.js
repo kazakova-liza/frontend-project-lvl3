@@ -1,6 +1,7 @@
 
 import validate from './validator.js'
 import getRSS from './rssLoader.js'
+import 'bootstrap'
 import parse from './parser.js'
 import { feeds } from './store.js'
 import onChange from 'on-change'
