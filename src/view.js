@@ -52,21 +52,17 @@ const render = (path, value, previousValue, applyData) => {
             button.classList.add('btn-secondary');
             const thisPost = streams.find((stream) => stream.title === item.title);
             button.id = thisPost.id;
+            const modalTitle = document.getElementsByClassName('modal-title')[0];
+            const modalBody = document.getElementsByClassName('modal-body')[0];
+            button.onclick = () => {
+                modalTitle.textContent = item.title;
+                modalBody.textContent = item.description;
+            }
             list.appendChild(post);
             list.appendChild(button);
-
-            // button.addEventListener('click', (event) => {
-            //     // event.preventDefault();
-            //     // event.stopPropagation();
-            //     thisPost.viewed = true;
-            //     const modal = document.getElementsByClassName('modal')[0];
-
-            //     modal.classList.add('show');
-            // });
             const divider = document.createElement('br');
             list.appendChild(divider);
             posts.appendChild(list);
-            $('#previewModal').modal('toggle');
         })
     }
 

@@ -26,10 +26,12 @@ const saveRSS = (RSS, url, newFlag) => {
     posts.map((post) => {
         const title = post.getElementsByTagName('title')[0].textContent;
         const link = post.getElementsByTagName('link')[0].textContent;
+        const description = post.getElementsByTagName('description')[0].textContent;
         const stream = {
             id,
             title,
             link,
+            description,
             viewed: false
         }
 
