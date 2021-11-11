@@ -12,22 +12,24 @@ import saveRSS from './src/saver.js'
 import addBootstrap from './src/bootstrap/addBootsrap.js'
 // import './App.css'
 
+let state = {
+    valid: null,
+    error: '',
+    feeds: [],
+    posts: [],
+    showModal: false,
+    currentModalTitle: '',
+    currentModalBody: ''
+}
+
+export const watchedState = onChange(state, (path, value) => render(path, value));
+
 
 const startApp = () => {
 
     let url;
 
-    let state = {
-        valid: null,
-        error: '',
-        feeds: [],
-        posts: [],
-        showModal: false,
-        currentModalTitle: '',
-        currentModalBody: ''
-    }
 
-    export const watchedState = onChange(state, (path, value) => render(path, value));
 
     addBootstrap();
 
