@@ -49,7 +49,7 @@ const startApp = () => {
         <form novalidate>
             <div class="form-group">
                 <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
-                <button type="submit" class="btn btn-primary" name='add'>Add</button>
+                <button type="submit" class="btn btn-primary aria-label='add'" name='add'>Add</button>
                 <div class="invalid-feedback">
                 ${state.error}
                 </div>
