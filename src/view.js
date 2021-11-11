@@ -1,8 +1,7 @@
 
 import removeAllChildNodes from './utils.js'
 import { streams } from './store.js'
-import { watchedState } from './index.js';
-import $ from "jquery";
+
 
 const render = (path, value, previousValue, applyData) => {
     const form = document.getElementsByClassName('form-control')[0];
