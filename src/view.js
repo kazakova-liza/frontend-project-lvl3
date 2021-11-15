@@ -16,7 +16,7 @@ const render = (path, value, previousValue, applyData) => {
             form.classList.add('is-invalid');
         }
     }
-    if (path === 'error') {
+    if (path === 'message') {
         feedback.textContent = value;
     }
     if (path === 'feeds') {

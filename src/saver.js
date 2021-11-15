@@ -1,6 +1,13 @@
 import getId from './idGenerator.js'
 import { feeds, streams } from './store.js'
-import { watchedState, updateRss } from '../index.js'
+import { watchedState } from '../index.js'
+import processRss from './processor.js'
+
+
+const updateRss = (url) => {
+    processRss(url, false);
+    setTimeout(() => updateRss(url), 5000);
+}
 
 const saveRSS = (RSS, url, newFlag) => {
     let id;

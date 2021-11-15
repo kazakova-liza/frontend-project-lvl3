@@ -1,20 +1,15 @@
 
-import validate from './src/validator.js'
-import getRSS from './src/rssLoader.js'
 import 'bootstrap'
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import parse from './src/parser.js'
-import { feeds } from './src/store.js'
+import processRss from './src/processor.js'
 import onChange from 'on-change'
 import render from './src/view.js'
-import i18next from './src/messages.js'
-import saveRSS from './src/saver.js'
 import addBootstrap from './src/bootstrap/addBootsrap.js'
 // import './App.css'
 
 let state = {
     valid: null,
-    error: '',
+    message: '',
     feeds: [],
     posts: [],
     showModal: false,
@@ -29,11 +24,7 @@ const startApp = () => {
 
     let url;
 
-
-
     addBootstrap();
-
-
 
     const getComponent = () => {
         const element = document.createElement('div');
@@ -44,10 +35,8 @@ const startApp = () => {
         <form novalidate>
             <div class="form-group">
                 <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
-                <button type="submit" class="btn btn-primary" aria-label='add' name='add'>Add</button>
-                <div class="invalid-feedback">
-                ${state.error}
-                </div>
+                    <button type="submit" class="btn btn-primary" aria-label='add' name='add'>Add</button>
+                    <div class="invalid-feedback"></div>
             </div>
         </form>
         <h1>Feeds</h1>
@@ -83,39 +72,6 @@ const startApp = () => {
 
     const form = document.getElementsByClassName('form-control')[0];
     const addButton = document.getElementsByClassName('btn-primary')[0];
-
-    // const modal = document.getElementById('myModal')
-
-    const processRss = (url, newFlag) => {
-        validate(url).then(() => {
-            if (newFlag) {
-                if (feeds.find((feed) => feed.url === url) !== undefined) {
-                    throw (i18next.t('duplicate'));
-                }
-            }
-            watchedState.valid = true;
-            watchedState.error = '';
-            getRSS(url).catch((err) => {
-                throw err;
-            }).then((response) => {
-                const parsedRSS = parse(response.data.contents);
-                saveRSS(parsedRSS, url, newFlag);
-            })
-        }).catch((err) => {
-            watchedState.valid = false;
-            form.valid = false;
-            if (err.errors != undefined) {
-                watchedState.error = err.errors[0];
-            }
-            watchedState.error = err;
-
-        });
-    }
-
-    export const updateRss = (url) => {
-        processRss(url, false);
-        setTimeout(() => updateRss(url), 5000);
-    }
 
 
     addButton.addEventListener('click', (event) => {

@@ -6,8 +6,16 @@ i18next.init({
     resources: {
         en: {
             translation: {
-                'duplicate': 'This feed already exists',
-                'invalidUrl': 'This should be a valid URL'
+                duplicate: 'This feed already exists',
+                invalidUrl: 'This should be a valid URL',
+                success: 'RSS has been successfully added'
+            }
+        },
+        ru: {
+            translation: {
+                duplicate: 'This feed already exists',
+                invalidUrl: 'This should be a valid URL',
+                success: 'RSS успешно загружен'
             }
         }
     }
