@@ -86,7 +86,7 @@ const startApp = () => {
         processRss(url, true);
     });
 
-    if (state.posts.length > 0) {
+    if (watchedState.posts.length > 0) {
         const viewButtons = document.getElementsByClassName('btn-view');
         [...viewButtons].map((button) => {
             button.addEventListener('click', (event) => {
@@ -95,9 +95,6 @@ const startApp = () => {
                 const id = event.value.id;
                 const thisPost = watchedState.posts.find((post) => post.id === id);
                 thisPost.viewed = true;
-                console.log(state.posts);
-
-
             });
         })
     }
