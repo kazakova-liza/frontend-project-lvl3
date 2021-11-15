@@ -17,22 +17,22 @@ const processRss = (url, newFlag) => {
             }
         }
         watchedState.valid = true;
-        watchedState.message = '';
+        watchedState.invalidFeedback = '';
         getRSS(url).catch((err) => {
             throw err;
         }).then((response) => {
             const parsedRSS = parse(response.data.contents);
             saveRSS(parsedRSS, url, newFlag);
-            watchedState.message = i18next.t('success');
+            watchedState.validFeedback = i18next.t('success');
         })
     }).catch((err) => {
         console.log(err);
         watchedState.valid = false;
         form.valid = false;
         if (err.errors != undefined) {
-            watchedState.message = err.errors[0];
+            watchedState.invalidFeedback = err.errors[0];
         }
-        watchedState.message = err;
+        watchedState.invalidFeedback = err;
 
     });
 }

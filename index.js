@@ -9,7 +9,8 @@ import addBootstrap from './src/bootstrap/addBootsrap.js'
 
 let state = {
     valid: null,
-    message: '',
+    invalidFeedback: '',
+    validFeedback: '',
     feeds: [],
     posts: [],
     showModal: false,
@@ -32,11 +33,12 @@ const startApp = () => {
         element.innerHTML = `
     <div class='app'>
         <h1>RSS stream</h1>
-        <form novalidate>
+        <form class="rss-input-form" novalidate>
             <div class="form-group">
                 <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
-                    <button type="submit" class="btn btn-primary" aria-label='add' name='add'>Add</button>
-                    <div class="invalid-feedback"></div>
+                <button type="submit" class="btn btn-primary" aria-label='add' name='add'>Add</button>
+                <div class="invalid-feedback"></div>
+                <div class="valid-feedback"></div>
             </div>
         </form>
         <h1>Feeds</h1>

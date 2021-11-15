@@ -4,20 +4,26 @@ import { streams } from './store.js'
 
 
 const render = (path, value, previousValue, applyData) => {
-    const form = document.getElementsByClassName('form-control')[0];
-    const feedback = document.getElementsByClassName('invalid-feedback')[0];
+    const input = document.getElementsByClassName('form-control')[0];
+    const form = document.getElementsByClassName('rss-input-form')[0];
+    const invalidFeedback = document.getElementsByClassName('invalid-feedback')[0];
+    const validFeedback = document.getElementsByClassName('valid-feedback')[0];
     const feeds = document.getElementsByClassName('feeds')[0];
     const posts = document.getElementsByClassName('posts')[0];
-    if (path === 'state') {
+    if (path === 'valid') {
         if (value) {
-            form.classList.add('is-valid');
+            input.classList.add('valid');
         }
         else {
-            form.classList.add('is-invalid');
+            input.classList.add('invalid');
         }
+        form.classList.add('was-validated');
     }
-    if (path === 'message') {
-        feedback.textContent = value;
+    if (path === 'invalidFeedback') {
+        invalidFeedback.textContent = value;
+    }
+    if (path === 'validFeedback') {
+        validFeedback.textContent = value;
     }
     if (path === 'feeds') {
         removeAllChildNodes(feeds);
@@ -65,8 +71,6 @@ const render = (path, value, previousValue, applyData) => {
             posts.appendChild(list);
         })
     }
-
-    form.classList.add('was-validated');
 }
 
 export default render;
