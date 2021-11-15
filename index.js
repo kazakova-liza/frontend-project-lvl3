@@ -5,20 +5,23 @@ import processRss from './src/processor.js'
 import onChange from 'on-change'
 import render from './src/view.js'
 import addBootstrap from './src/bootstrap/addBootsrap.js'
+import initApp from './src/init.js'
 // import './App.css'
 
-let state = {
-    valid: null,
-    invalidFeedback: '',
-    validFeedback: '',
-    feeds: [],
-    posts: [],
-    showModal: false,
-    currentModalTitle: '',
-    currentModalBody: ''
-}
+// let state = {
+//     valid: null,
+//     invalidFeedback: '',
+//     validFeedback: '',
+//     feeds: [],
+//     posts: [],
+//     showModal: false,
+//     currentModalTitle: '',
+//     currentModalBody: ''
+// }
 
-export const watchedState = onChange(state, (path, value) => render(path, value));
+// export const watchedState = onChange(state, (path, value) => render(path, value));
+
+export const watchedState = initApp();
 
 
 const startApp = () => {
