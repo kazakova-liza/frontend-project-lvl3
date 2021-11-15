@@ -97,11 +97,12 @@ const startApp = () => {
                 if (feeds.find((feed) => feed.url === url) !== undefined) {
                     throw (i18next.t('duplicate'));
                 }
-
             }
             watchedState.valid = true;
             watchedState.error = '';
-            getRSS(url).then((response) => {
+            getRSS(url).catch((err) => {
+                throw err;
+            }).then((response) => {
                 const parsedRSS = parse(response.data.contents);
                 saveRSS(parsedRSS, url, newFlag);
             })
@@ -140,6 +141,8 @@ const startApp = () => {
         })
     }
 }
+
+startApp();
 export default startApp;
 
 
