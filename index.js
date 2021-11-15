@@ -24,11 +24,6 @@ let state = {
 
 export const watchedState = onChange(state, (path, value) => render(path, value));
 
-export const updateRss = (url) => {
-    processRss(url, false);
-    setTimeout(() => updateRss(url), 5000);
-}
-
 
 const startApp = () => {
 
@@ -115,6 +110,11 @@ const startApp = () => {
             watchedState.error = err;
 
         });
+    }
+
+    export const updateRss = (url) => {
+        processRss(url, false);
+        setTimeout(() => updateRss(url), 5000);
     }
 
 
