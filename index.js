@@ -20,7 +20,7 @@ const state = {
 
 export const watchedState = onChange(state, (path, value) => render(path, value));
 
-export default initApp = () => {
+const initApp = () => {
     const i18nextInstance = i18next.createInstance();
     i18nextInstance.init({
         lng: 'ru',
@@ -116,3 +116,5 @@ export default initApp = () => {
         })
     }
 }
+
+export default initApp;
