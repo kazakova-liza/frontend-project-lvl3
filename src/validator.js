@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import i18next from './messages.js'
+import i18next from './dictionary.js'
 
 yup.setLocale({
     string: {
