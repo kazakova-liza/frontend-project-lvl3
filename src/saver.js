@@ -1,6 +1,6 @@
 import getId from './idGenerator.js'
 import { feeds, streams } from './store.js'
-import { watchedState } from './init.js'
+import { watchedState } from '../index.js'
 import processRss from './processor.js'
 
 

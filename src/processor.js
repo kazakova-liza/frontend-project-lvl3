@@ -5,7 +5,7 @@ import parse from './parser.js'
 import { feeds } from './store.js'
 import i18next from './dictionary.js'
 import saveRSS from './saver.js'
-import { watchedState } from './init.js'
+import { watchedState } from '../index.js'
 
 
 const processRss = (url, newFlag) => {
