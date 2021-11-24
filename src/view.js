@@ -1,5 +1,5 @@
 
-import removeAllChildNodes from './utils.js'
+import removeAllChildNodes from './utils/removeAllChildNodes.js'
 import { streams } from './store.js'
 
 

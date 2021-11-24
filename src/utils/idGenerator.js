@@ -1,4 +1,4 @@
-import { feeds } from './store.js'
+import { feeds } from '../store.js'
 
 const getId = () => {
     let id;

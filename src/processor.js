@@ -1,19 +1,17 @@
 
-import validate from './validator.js'
+import { validate } from './validator.js'
 import getRSS from './rssLoader.js'
 import parse from './parser.js'
 import { feeds } from './store.js'
-import i18next from './dictionary.js'
 import saveRSS from './saver.js'
-import { watchedState } from '../index.js'
 
 
-const processRss = (url, newFlag) => {
+const processRss = (url, newFlag, watchedState, i18nextInstance) => {
     const form = document.getElementsByClassName('form-control')[0];
     validate(url).then(() => {
         if (newFlag) {
             if (feeds.find((feed) => feed.url === url) !== undefined) {
-                throw (i18next.t('duplicate'));
+                throw (i18nextInstance.t('duplicate'));
             }
         }
         watchedState.valid = true;
@@ -22,8 +20,8 @@ const processRss = (url, newFlag) => {
             throw err;
         }).then((response) => {
             const parsedRSS = parse(response.data.contents);
-            saveRSS(parsedRSS, url, newFlag);
-            watchedState.validFeedback = i18next.t('success');
+            saveRSS(parsedRSS, url, newFlag, watchedState);
+            watchedState.validFeedback = i18nextInstance.t('success');
         })
     }).catch((err) => {
         console.log(err);

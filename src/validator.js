@@ -1,21 +1,22 @@
 import * as yup from 'yup'
-import i18next from './dictionary.js'
 
-yup.setLocale({
-    string: {
-        url: i18next.t('invalidUrl'),
-    },
-});
+
+export const setYup = (i18nextInstance) => {
+    yup.setLocale({
+        string: {
+            url: i18nextInstance.t('invalidUrl'),
+        },
+    });
+}
 
 
 const schema = yup.string().url().min(2);
 
 
-const validate = (data) => {
+export const validate = (data) => {
     return schema.validate(data);
 }
 
-export default validate;
 
 
 
