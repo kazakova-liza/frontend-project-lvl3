@@ -30,9 +30,7 @@ const initApp = () => {
 
     setYup(i18nextInstance);
 
-    const component = getComponent();
-
-    // document.body.appendChild(component);
+    getComponent();
 
     const form = document.getElementsByClassName('form-control')[0];
     const addButton = document.getElementsByClassName('btn-primary')[0];
@@ -58,5 +56,7 @@ const initApp = () => {
         })
     }
 }
+
+initApp();
 
 export default initApp;
