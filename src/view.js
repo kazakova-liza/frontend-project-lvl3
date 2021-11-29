@@ -43,7 +43,7 @@ const render = (path, value, previousValue, applyData) => {
         removeAllChildNodes(posts);
         value.map((item) => {
             const list = document.createElement('li');
-            list.className = 'justify-content-between';
+            list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
             const post = document.createElement('a');
             post.className = item.viewed ? 'fw-normal' : 'fw-bold';
             post.href = item.link;
@@ -51,7 +51,7 @@ const render = (path, value, previousValue, applyData) => {
 
             const button = document.createElement('button');
             button.textContent = 'View';
-            button.className = 'btn-view';
+            button.classList.add('btn', 'btn-primary', 'btn-view');
             button.dataset.bsTarget = "#previewModal";
             button.dataset.bsToggle = 'modal';
             button.classList.add('btn-secondary');
