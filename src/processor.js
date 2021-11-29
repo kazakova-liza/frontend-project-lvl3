@@ -2,7 +2,6 @@
 import { validate } from './validator.js'
 import getRSS from './rssLoader.js'
 import parse from './parser.js'
-import { feeds } from './store.js'
 import saveRSS from './saver.js'
 
 
@@ -11,7 +10,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance) => {
     const form = document.getElementsByClassName('form-control')[0];
     validate(url).then(() => {
         if (newFlag) {
-            if (feeds.find((feed) => feed.url === url) !== undefined) {
+            if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
                 throw (i18nextInstance.t('duplicate'));
             }
         }

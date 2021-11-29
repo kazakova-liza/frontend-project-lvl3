@@ -1,8 +1,7 @@
-import { feeds } from '../store.js'
 
-const getId = () => {
+const getId = (watchedState) => {
     let id;
-    if (feeds.length !== 0) {
+    if (watchedState.feeds.length !== 0) {
         const currentIds = feeds.map((feed) => feed.id);
         const uniqueIds = [...new Set(currentIds)];
         uniqueIds.sort((a, b) => b - a);

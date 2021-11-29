@@ -1,6 +1,5 @@
 
 import removeAllChildNodes from './utils/removeAllChildNodes.js'
-import { streams } from './store.js'
 
 
 const render = (path, value, previousValue, applyData) => {
@@ -55,7 +54,7 @@ const render = (path, value, previousValue, applyData) => {
             button.dataset.bsTarget = "#previewModal";
             button.dataset.bsToggle = 'modal';
             button.classList.add('btn-secondary');
-            const thisPost = streams.find((stream) => stream.title === item.title);
+            const thisPost = value.find((stream) => stream.title === item.title);
             button.id = thisPost.id;
             const modalTitle = document.getElementsByClassName('modal-title')[0];
             const modalBody = document.getElementsByClassName('modal-body')[0];
