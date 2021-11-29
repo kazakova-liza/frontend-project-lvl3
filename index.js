@@ -21,10 +21,12 @@ const state = {
 };
 
 
+
 const initApp = () => {
-    const watchedState = onChange(state, (path, value) => render(path, value));
     const i18nextInstance = i18next.createInstance();
     i18nextInstance.init(locale);
+
+    const watchedState = onChange(state, (path, value) => render(path, value));
 
     addBootstrap();
 

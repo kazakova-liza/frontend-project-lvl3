@@ -3,12 +3,12 @@ import { feeds, streams } from './store.js'
 import processRss from './processor.js'
 
 
-const updateRss = (url) => {
-    processRss(url, false);
+const updateRss = (url, watchedState, i18nextInstance) => {
+    processRss(url, false, watchedState, i18nextInstance);
     setTimeout(() => updateRss(url), 5000);
 }
 
-const saveRSS = (RSS, url, newFlag, watchedState) => {
+const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance) => {
     let id;
     let existingPosts;
     if (newFlag) {
@@ -55,7 +55,7 @@ const saveRSS = (RSS, url, newFlag, watchedState) => {
     })
     watchedState.posts = [...streams];
     if (newFlag) {
-        updateRss(url);
+        updateRss(url, watchedState, i18nextInstance);
     }
 }
 

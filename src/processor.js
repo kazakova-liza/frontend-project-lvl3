@@ -7,7 +7,7 @@ import saveRSS from './saver.js'
 
 
 const processRss = (url, newFlag, watchedState, i18nextInstance) => {
-    console.log(watchedState.valid);
+    console.log(watchedState);
     const form = document.getElementsByClassName('form-control')[0];
     validate(url).then(() => {
         if (newFlag) {
@@ -21,7 +21,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance) => {
             throw err;
         }).then((response) => {
             const parsedRSS = parse(response.data.contents);
-            saveRSS(parsedRSS, url, newFlag, watchedState);
+            saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance);
             watchedState.validFeedback = i18nextInstance.t('success');
         })
         console.log(watchedState.valid);
