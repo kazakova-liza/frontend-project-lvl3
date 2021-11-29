@@ -1,13 +1,13 @@
 import i18next from 'i18next'
 import onChange from 'on-change'
-import render from './view.js'
+import render from './src/view.js'
 import 'bootstrap'
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import processRss from './processor.js'
-import addBootstrap from './bootstrap/addBootsrap.js'
-import locale from './utils/locales.js'
-import getComponent from './component.js'
-import { setYup } from './validator.js'
+import processRss from './src/processor.js'
+import addBootstrap from './src/bootstrap/addBootsrap.js'
+import locale from './src/utils/locales.js'
+import getComponent from './src/component.js'
+import { setYup } from './src/validator.js'
 
 
 
@@ -59,4 +59,5 @@ const initApp = () => {
 }
 
 initApp();
+
 export default initApp;
