@@ -5,7 +5,7 @@ import processRss from './processor.js'
 
 const updateRss = (url, watchedState, i18nextInstance) => {
     processRss(url, false, watchedState, i18nextInstance);
-    setTimeout(() => updateRss(url), 5000);
+    setTimeout(() => updateRss(url, watchedState, i18nextInstance), 5000);
 }
 
 const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance) => {

@@ -3,21 +3,46 @@ export default () => {
 
     element.innerHTML = `
         <div class='app'>
-            <h1>RSS stream</h1>
-            <form class="rss-input-form" novalidate>
-                <div class="form-group">
-                    <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
-                    <button type="submit" class="btn btn-primary" aria-label='add' name='add'>Add</button>
-                    <div class="invalid-feedback"></div>
-                    <div class="valid-feedback"></div>
+            <main class="flex-grow-1">
+            <section class="container-fluid bg-dark p-5">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto text-white">
+                <h1 class="display-3 mb-0">RSS aggregator</h1>
+                <p class="lead">
+                    Start reading RSS today! It's easy and simple.
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <form class="rss-input-form" novalidate>
+                            <div class="form-group">
+                                <input class="form-control" id="rssInput" required autofocus aria-label='url' placeholder="Enter url">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary" aria-label='add' name='add'>Add</button>
+                        <div class="invalid-feedback"></div>
+                        <div class="valid-feedback"></div>
+                    </div>
                 </div>
-            </form>
-            <h1>Feeds</h1>
-            <div class='feeds'>
+                <p class="mt-2 mb-0 text-muted">
+                    Example: https://ru.hexlet.io/lessons.rss
+                </p>
+                <p class="feedback m-0 position-absolute small text-danger"></p>
+                </div>
             </div>
-            <h1>Posts</h1>
-            <div class='posts'>
+            </section>
+            <section class="container-fluid container-xxl p-5">
+            <div class="row">
+                <div
+                class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds"
+                >
+                </div>
+                <div class="col-md-10 col-lg-8 order-1 mx-auto posts">
+                </div>
             </div>
+            </section>
+        </main>
             <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
