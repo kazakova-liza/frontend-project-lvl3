@@ -9,20 +9,19 @@ import locale from './src/utils/locales.js'
 import getComponent from './src/component.js'
 import { setYup } from './src/validator.js'
 
-const state = {
-    valid: null,
-    invalidFeedback: '',
-    validFeedback: '',
-    feeds: [],
-    posts: [],
-    showModal: false,
-    currentModalTitle: '',
-    currentModalBody: ''
-};
-
 
 
 const initApp = () => {
+    const state = {
+        valid: null,
+        invalidFeedback: '',
+        validFeedback: '',
+        feeds: [],
+        posts: [],
+        showModal: false,
+        currentModalTitle: '',
+        currentModalBody: ''
+    };
     const i18nextInstance = i18next.createInstance();
     i18nextInstance.init(locale);
 
