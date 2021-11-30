@@ -11,7 +11,7 @@ export default {
         },
         ru: {
             translation: {
-                duplicate: 'This feed already exists',
+                duplicate: 'RSS уже существует',
                 invalidUrl: 'This should be a valid URL',
                 success: 'RSS успешно загружен'
             }
