@@ -6,36 +6,28 @@ import saveRSS from './saver.js'
 
 
 const processRss = (url, newFlag, watchedState, i18nextInstance) => {
-    console.log(watchedState);
-    const form = document.getElementsByClassName('form-control')[0];
-    validate(url).then(() => {
-        if (newFlag) {
-            if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
-                throw (i18nextInstance.t('duplicate'));
+    validate(url)
+        .then(() => {
+            if (newFlag) {
+                if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
+                    throw (i18nextInstance.t('duplicate'));
+                }
             }
-        }
-        watchedState.valid = true;
-        watchedState.invalidFeedback = '';
-        getRSS(url).catch((err) => {
-            throw err;
-        }).then((response) => {
+        })
+        .then(() => getRSS(url))
+        .then((response) => {
             const parsedRSS = parse(response.data.contents);
             saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance);
-            watchedState.validFeedback = i18nextInstance.t('success');
         })
-        console.log(watchedState.valid);
-    }).catch((err) => {
-        // console.log(watchedState.valid);
-        // console.log(err);
-        watchedState.valid = false;
-        form.valid = false;
-        if (err.errors !== undefined) {
-            watchedState.invalidFeedback = err.errors[0];
-        }
-        watchedState.invalidFeedback = err;
-        console.log(watchedState.valid);
+        .catch((err) => {
+            watchedState.valid = false;
+            watchedState.validFeedback = '';
+            if (err.errors !== undefined) {
+                watchedState.invalidFeedback = err.errors[0];
+            }
+            watchedState.invalidFeedback = err;
 
-    });
+        });
 }
 
 export default processRss;

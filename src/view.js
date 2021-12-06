@@ -11,12 +11,14 @@ const render = (path, value, previousValue, applyData) => {
     const posts = document.getElementsByClassName('posts')[0];
     if (path === 'valid') {
         if (value) {
-            input.classList.add('valid');
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
         }
         else {
-            input.classList.add('invalid');
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
         }
-        form.classList.add('was-validated');
+        //form.classList.add('was-validated');
     }
     if (path === 'invalidFeedback') {
         invalidFeedback.textContent = value;

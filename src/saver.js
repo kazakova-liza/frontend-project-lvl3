@@ -52,6 +52,8 @@ const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance) => {
 
     })
     if (newFlag) {
+        watchedState.validFeedback = i18nextInstance.t('success');
+        watchedState.valid = true;
         updateRss(url, watchedState, i18nextInstance);
     }
 }
