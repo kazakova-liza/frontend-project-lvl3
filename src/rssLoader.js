@@ -3,7 +3,8 @@ import axios from 'axios'
 
 
 const getProxyUrl = (url) => {
-    return `https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${encodeURIComponent(url)}`;
+    return `https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${url}`;
+    // return `https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${encodeURIComponent(url)}`;
 }
 
 
