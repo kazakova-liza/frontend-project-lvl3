@@ -10,6 +10,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance) => {
         .then(() => {
             if (newFlag) {
                 if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
+                    console.log(url, 'duplicate');
                     throw (i18nextInstance.t('duplicate'));
                 }
             }
@@ -18,6 +19,8 @@ const processRss = (url, newFlag, watchedState, i18nextInstance) => {
         .then((response) => {
             const parsedRSS = parse(response.data.contents);
             saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance);
+            const form = document.getElementsByClassName('form-control')[0];
+            form.value = '';
         })
         .catch((err) => {
             watchedState.valid = false;
