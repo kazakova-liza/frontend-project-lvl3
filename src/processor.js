@@ -5,8 +5,8 @@ import parse from './parser.js'
 import saveRSS from './saver.js'
 
 
-const processRss = (url, newFlag, watchedState, i18nextInstance) => {
-    validate(url)
+const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
+    validate(url, schema)
         .then(() => {
             if (newFlag) {
                 if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
@@ -18,7 +18,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance) => {
         .then(() => getRSS(url))
         .then((response) => {
             const parsedRSS = parse(response.data.contents);
-            saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance);
+            saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
             const form = document.getElementsByClassName('form-control')[0];
             form.value = '';
         })
@@ -28,7 +28,10 @@ const processRss = (url, newFlag, watchedState, i18nextInstance) => {
             if (err.errors !== undefined) {
                 watchedState.invalidFeedback = err.errors[0];
             }
-            watchedState.invalidFeedback = err;
+            else {
+                watchedState.invalidFeedback = err;
+            }
+
 
         });
 }

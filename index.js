@@ -7,9 +7,15 @@ import processRss from './src/processor.js'
 import addBootstrap from './src/bootstrap/addBootsrap.js'
 import locale from './src/utils/locales.js'
 import getComponent from './src/component.js'
-import { setYup } from './src/validator.js'
+import * as yup from 'yup'
 
-
+const setYup = (i18nextInstance) => {
+    yup.setLocale({
+        string: {
+            url: i18nextInstance.t('invalidUrl'),
+        },
+    });
+}
 
 const initApp = () => {
     const state = {
@@ -30,7 +36,7 @@ const initApp = () => {
     addBootstrap();
 
     setYup(i18nextInstance);
-
+    const schema = yup.string().url();
     getComponent();
 
     const form = document.getElementsByClassName('form-control')[0];
@@ -41,7 +47,7 @@ const initApp = () => {
         event.preventDefault();
         event.stopPropagation();
         const url = form.value;
-        processRss(url, true, watchedState, i18nextInstance);
+        processRss(url, true, watchedState, i18nextInstance, schema);
     });
 
     if (watchedState.posts.length > 0) {

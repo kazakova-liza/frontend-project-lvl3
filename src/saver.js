@@ -2,12 +2,12 @@ import getId from './utils/idGenerator.js'
 import processRss from './processor.js'
 
 
-const updateRss = (url, watchedState, i18nextInstance) => {
-    processRss(url, false, watchedState, i18nextInstance);
-    setTimeout(() => updateRss(url, watchedState, i18nextInstance), 5000);
+const updateRss = (url, watchedState, i18nextInstance, shema) => {
+    processRss(url, false, watchedState, i18nextInstance, schema);
+    setTimeout(() => updateRss(url, watchedState, i18nextInstance, shema), 5000);
 }
 
-const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance) => {
+const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance, schema) => {
     let id;
     let existingPosts;
     if (newFlag) {
@@ -54,7 +54,7 @@ const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance) => {
     if (newFlag) {
         watchedState.validFeedback = i18nextInstance.t('success');
         watchedState.valid = true;
-        updateRss(url, watchedState, i18nextInstance);
+        updateRss(url, watchedState, i18nextInstance, schema);
     }
 }
 
