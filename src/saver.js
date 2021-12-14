@@ -2,9 +2,9 @@ import getId from './utils/idGenerator.js'
 import processRss from './processor.js'
 
 
-const updateRss = (url, watchedState, i18nextInstance, shema) => {
+const updateRss = (url, watchedState, i18nextInstance, schema) => {
     processRss(url, false, watchedState, i18nextInstance, schema);
-    setTimeout(() => updateRss(url, watchedState, i18nextInstance, shema), 5000);
+    setTimeout(() => updateRss(url, watchedState, i18nextInstance, schema), 5000);
 }
 
 const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance, schema) => {
