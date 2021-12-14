@@ -27,7 +27,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
             console.log(form.value);
         })
         .catch((err) => {
-            console.log(form.value);
+            console.log(err);
             console.log(form.value);
             watchedState.valid = false;
             watchedState.validFeedback = '';
