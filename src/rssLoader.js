@@ -10,9 +10,7 @@ const proxifyUrl = (url) => {
 const getRSS = (url) => {
     const proxifiedUrl = proxifyUrl(url);
     // console.log(proxifiedUrl);
-    return axios.get(proxifiedUrl).catch(() => {
-        throw i18nextInstance.t('invalidRss');
-    });
+    return axios.get(proxifiedUrl);
 }
 
 export default getRSS;

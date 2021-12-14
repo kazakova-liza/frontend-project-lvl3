@@ -21,6 +21,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
         .then((response) => {
             // console.log(form.value);
             const parsedRSS = parse(response.data.contents);
+            console.log(parsedRSS);
             saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
             // const form = document.getElementsByClassName('form-control')[0];
             form.value = '';
