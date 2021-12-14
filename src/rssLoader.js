@@ -8,6 +8,7 @@ const proxifyUrl = (url) => {
 
 
 const getRSS = (url) => {
+    console.log(url);
     const proxifiedUrl = proxifyUrl(url);
     // console.log(proxifiedUrl);
     return axios.get(proxifiedUrl);
