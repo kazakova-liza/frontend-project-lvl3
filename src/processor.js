@@ -20,9 +20,9 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
         .then(() => getRSS(url, i18nextInstance))
         .then((response) => {
             // console.log(form.value);
-            if (response.data.contents === null) {
-                throw (i18nextInstance.t('invalidRss'));
-            }
+            // if (response.data.contents === null) {
+            //     throw (i18nextInstance.t('invalidRss'));
+            // }
             const parsedRSS = parse(response.data.contents);
             saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
             // const form = document.getElementsByClassName('form-control')[0];

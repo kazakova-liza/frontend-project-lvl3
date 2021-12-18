@@ -10,13 +10,18 @@ const updateRss = (url, watchedState, i18nextInstance, schema) => {
 const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance, schema) => {
     let id;
     let existingPosts;
+    const title = RSS.getElementsByTagName('title')[0];
+    const description = RSS.getElementsByTagName('description')[0];
+    if (title === undefined || description === undefined) {
+        throw (i18nextInstance.t('invalidRss'));
+    }
     if (newFlag) {
         id = getId(watchedState);
         watchedState.feeds.push({
             id,
             url,
-            title: RSS.getElementsByTagName('title')[0].textContent,
-            description: RSS.getElementsByTagName('description')[0].textContent,
+            title: title.textContent,
+            description: description.textContent,
         })
 
     }
