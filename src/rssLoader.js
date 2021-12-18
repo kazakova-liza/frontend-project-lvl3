@@ -7,11 +7,12 @@ const proxifyUrl = (url) => {
 }
 
 
-const getRSS = (url) => {
+const getRSS = (url, i18nextInstance) => {
     console.log(url);
     const proxifiedUrl = proxifyUrl(url);
-    // console.log(proxifiedUrl);
-    return axios.get(proxifiedUrl);
+    return axios.get(proxifiedUrl).catch(() => {
+        throw (i18nextInstance.t('networkError'));
+    });
 }
 
 export default getRSS;

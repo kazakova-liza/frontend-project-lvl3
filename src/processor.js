@@ -9,7 +9,6 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
     const form = document.getElementsByClassName('form-control')[0];
     validate(url, schema)
         .then(() => {
-            // console.log(form.value);
             if (newFlag) {
                 if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
                     console.log(form.value);
@@ -19,19 +18,11 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
         })
         .then(() => getRSS(url, i18nextInstance))
         .then((response) => {
-            // console.log(form.value);
-            // if (response.data.contents === null) {
-            //     throw (i18nextInstance.t('invalidRss'));
-            // }
             const parsedRSS = parse(response.data.contents);
             saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
-            // const form = document.getElementsByClassName('form-control')[0];
             form.value = '';
-            // console.log(form.value);
         })
         .catch((err) => {
-            // console.log(err);
-            // console.log(form.value);
             watchedState.valid = false;
             watchedState.validFeedback = '';
             if (err.errors !== undefined) {
