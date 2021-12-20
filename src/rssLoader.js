@@ -8,7 +8,6 @@ const proxifyUrl = (url) => {
 
 
 const getRSS = (url, i18nextInstance) => {
-    console.log(url);
     const proxifiedUrl = proxifyUrl(url);
     return axios.get(proxifiedUrl).catch(() => {
         throw (i18nextInstance.t('networkError'));
