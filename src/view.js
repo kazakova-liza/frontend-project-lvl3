@@ -46,7 +46,13 @@ const render = (path, value, previousValue, applyData) => {
             const list = document.createElement('li');
             list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
             const post = document.createElement('a');
-            post.className = item.viewed ? 'fw-normal' : 'fw-bold';
+            if (item.viewed) {
+                post.classList.remove('fw-normal').add('fw-bold');
+            }
+            else {
+                post.classList.remove('fw-bold').add('fw-normal');
+            }
+            // post.className = item.viewed ? 'fw-normal' : 'fw-bold';
             post.href = item.link;
             post.textContent = item.title;
 
