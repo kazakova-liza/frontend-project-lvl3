@@ -9,6 +9,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
     const form = document.getElementsByClassName('form-control')[0];
     const addButton = document.getElementsByClassName('btn-primary')[0];
     form.readOnly = true;
+    addButton.disabled = true;
     validate(url, schema)
         .then(() => {
             if (newFlag) {
@@ -24,9 +25,11 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
             saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
             form.value = '';
             form.readOnly = false;
+            addButton.disabled = false;
         })
         .catch((err) => {
             form.readOnly = false;
+            addButton.disabled = false;
             watchedState.valid = false;
             watchedState.validFeedback = '';
             if (err.errors !== undefined) {
