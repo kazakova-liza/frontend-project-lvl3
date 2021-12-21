@@ -52,7 +52,7 @@ const render = (path, value, previousValue, applyData) => {
 
             const button = document.createElement('button');
             button.name = 'Просмотр';
-            button.textContent = 'View';
+            button.textContent = 'Просмотр';
             button.classList.add('btn', 'btn-primary', 'btn-view');
             button.dataset.bsTarget = "#previewModal";
             button.dataset.bsToggle = 'modal';
