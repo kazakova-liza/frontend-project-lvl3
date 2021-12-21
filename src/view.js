@@ -51,6 +51,7 @@ const render = (path, value, previousValue, applyData) => {
             post.textContent = item.title;
 
             const button = document.createElement('button');
+            button.name = 'Просмотр';
             button.textContent = 'View';
             button.classList.add('btn', 'btn-primary', 'btn-view');
             button.dataset.bsTarget = "#previewModal";
