@@ -49,12 +49,13 @@ const render = (path, value, previousValue, applyData) => {
             if (item.viewed) {
                 post.classList.remove('fw-bold');
                 post.classList.add('fw-normal');
+                console.log(`viewed: ${post.classList}`)
             }
             else {
                 post.classList.remove('fw-normal')
                 post.classList.add('fw-bold');
+                console.log(`not viewed: ${post.classList}`)
             }
-            // post.className = item.viewed ? 'fw-normal' : 'fw-bold';
             post.href = item.link;
             post.textContent = item.title;
 
