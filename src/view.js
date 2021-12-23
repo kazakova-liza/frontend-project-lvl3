@@ -47,12 +47,12 @@ const render = (path, value, previousValue, applyData) => {
             list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
             const post = document.createElement('a');
             if (item.viewed) {
-                post.classList.remove('fw-normal');
-                post.classList.add('fw-bold');
+                post.classList.remove('fw-bold');
+                post.classList.add('fw-normal');
             }
             else {
-                post.classList.remove('fw-bold')
-                post.classList.add('fw-normal');
+                post.classList.remove('fw-normal')
+                post.classList.add('fw-bold');
             }
             // post.className = item.viewed ? 'fw-normal' : 'fw-bold';
             post.href = item.link;
