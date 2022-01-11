@@ -30,11 +30,8 @@ const initApp = () => {
 
     const watchedState = onChange(state, (path, value) => render(path, value));
 
-    // addBootstrap();
-
     setYup(i18nextInstance);
     const schema = yup.string().url();
-    // getComponent();
 
     const form = document.getElementsByClassName('form-control')[0];
     const addButton = document.getElementsByClassName('btn-primary')[0];
