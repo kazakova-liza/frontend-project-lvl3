@@ -2,11 +2,8 @@ import i18next from 'i18next'
 import onChange from 'on-change'
 import render from './src/view.js'
 import 'bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import processRss from './src/processor.js'
-import addBootstrap from './src/bootstrap/addBootsrap.js'
 import locale from './src/utils/locales.js'
-import getComponent from './src/component.js'
 import * as yup from 'yup'
 
 const setYup = (i18nextInstance) => {
@@ -33,11 +30,11 @@ const initApp = () => {
 
     const watchedState = onChange(state, (path, value) => render(path, value));
 
-    addBootstrap();
+    // addBootstrap();
 
     setYup(i18nextInstance);
     const schema = yup.string().url();
-    getComponent();
+    // getComponent();
 
     const form = document.getElementsByClassName('form-control')[0];
     const addButton = document.getElementsByClassName('btn-primary')[0];

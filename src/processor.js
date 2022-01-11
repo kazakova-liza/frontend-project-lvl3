@@ -14,7 +14,6 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
         .then(() => {
             if (newFlag) {
                 if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
-                    console.log(form.value);
                     throw (i18nextInstance.t('duplicate'));
                 }
             }

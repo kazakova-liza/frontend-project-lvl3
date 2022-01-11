@@ -19,6 +19,7 @@ module.exports = {
             },
             {
                 test: /\.(scss)$/,
+                exclude: /node_modules/,
                 use: [{
                     loader: 'style-loader', // inject CSS to page
                 }, {
