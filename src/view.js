@@ -74,6 +74,9 @@ const render = (path, value, previousValue, applyData) => {
                 modalTitle.textContent = item.title;
                 modalBody.textContent = item.description;
                 item.viewed = true;
+                post.classList.remove('fw-bold');
+                post.classList.add('fw-normal');
+                console.log(`viewed: ${post.classList}`)
             }
             list.appendChild(post);
             list.appendChild(button);
