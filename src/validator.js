@@ -1,9 +1,1 @@
-
-
-export const validate = (data, schema) => {
-    return schema.validate(data);
-}
-
-
-
-
+export default (data, schema) => schema.validate(data);

@@ -1,62 +1,61 @@
-import i18next from 'i18next'
-import onChange from 'on-change'
-import render from './src/view.js'
-import 'bootstrap'
-import processRss from './src/processor.js'
-import locale from './src/utils/locales.js'
-import * as yup from 'yup'
+import i18next from 'i18next';
+import onChange from 'on-change';
+import * as yup from 'yup';
+import render from './src/view.js';
+import 'bootstrap';
+import processRss from './src/processor.js';
+import locale from './src/utils/locales.js';
 
 const setYup = (i18nextInstance) => {
-    yup.setLocale({
-        string: {
-            url: i18nextInstance.t('invalidUrl'),
-        },
-    });
-}
+  yup.setLocale({
+    string: {
+      url: i18nextInstance.t('invalidUrl'),
+    },
+  });
+};
 
 const initApp = () => {
-    const state = {
-        valid: null,
-        invalidFeedback: '',
-        validFeedback: '',
-        feeds: [],
-        posts: [],
-        showModal: false,
-        currentModalTitle: '',
-        currentModalBody: ''
-    };
-    const i18nextInstance = i18next.createInstance();
-    i18nextInstance.init(locale);
+  const state = {
+    valid: null,
+    invalidFeedback: '',
+    validFeedback: '',
+    feeds: [],
+    posts: [],
+    showModal: false,
+    currentModalTitle: '',
+    currentModalBody: '',
+  };
+  const i18nextInstance = i18next.createInstance();
+  i18nextInstance.init(locale);
 
-    const watchedState = onChange(state, (path, value) => render(path, value));
+  const watchedState = onChange(state, (path, value) => render(path, value));
 
-    setYup(i18nextInstance);
-    const schema = yup.string().url();
+  setYup(i18nextInstance);
+  const schema = yup.string().url();
 
-    const form = document.getElementsByClassName('form-control')[0];
-    const addButton = document.getElementsByClassName('btn-primary')[0];
+  const form = document.getElementsByClassName('form-control')[0];
+  const addButton = document.getElementsByClassName('btn-primary')[0];
 
+  addButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const url = form.value;
+    processRss(url, true, watchedState, i18nextInstance, schema);
+  });
 
-    addButton.addEventListener('click', (event) => {
+  if (watchedState.posts.length > 0) {
+    const viewButtons = document.getElementsByClassName('btn-view');
+    [...viewButtons].forEach((button) => {
+      button.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        const url = form.value;
-        processRss(url, true, watchedState, i18nextInstance, schema);
+        const { id } = event.value;
+        const thisPost = watchedState.posts.find((post) => post.id === id);
+        thisPost.viewed = true;
+      });
     });
-
-    if (watchedState.posts.length > 0) {
-        const viewButtons = document.getElementsByClassName('btn-view');
-        [...viewButtons].map((button) => {
-            button.addEventListener('click', (event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                const id = event.value.id;
-                const thisPost = watchedState.posts.find((post) => post.id === id);
-                thisPost.viewed = true;
-            });
-        })
-    }
-}
+  }
+};
 
 initApp();
 
