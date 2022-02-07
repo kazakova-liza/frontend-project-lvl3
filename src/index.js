@@ -1,10 +1,10 @@
 import i18next from 'i18next';
 import onChange from 'on-change';
 import * as yup from 'yup';
-import render from './src/view.js';
+import render from './view.js';
 import 'bootstrap';
-import processRss from './src/processor.js';
-import locale from './src/utils/locales.js';
+import processRss from './processor.js';
+import locale from './utils/locales.js';
 
 const setYup = (i18nextInstance) => {
     yup.setLocale({
