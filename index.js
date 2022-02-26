@@ -36,12 +36,11 @@ const initApp = () => {
     const form = document.getElementsByClassName('form-control')[0];
     const addButton = document.getElementsByClassName('btn-primary')[0];
 
-    console.log(addButton);
-
     addButton.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
         const url = form.value;
+        console.log(url);
         processRss(url, true, watchedState, i18nextInstance, schema);
     });
 
@@ -59,6 +58,6 @@ const initApp = () => {
     }
 };
 
-
+// initApp();
 
 export default initApp;
