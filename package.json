@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/kazakova-liza/frontend-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/kazakova-liza/frontend-project-lvl3/actions)",
   "private": true,
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
