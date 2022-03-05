@@ -55,6 +55,9 @@ const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance, schema) => {
     watchedState.valid = true;
     updateRss(url, watchedState, i18nextInstance, schema);
   }
+  form.value = '';
+  form.readOnly = false;
+  addButton.disabled = false;
 };
 
 export default saveRSS;

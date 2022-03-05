@@ -6,6 +6,8 @@ const render = (path, value) => {
   const validFeedback = document.getElementsByClassName('valid-feedback')[0];
   const feeds = document.getElementsByClassName('feeds')[0];
   const posts = document.getElementsByClassName('posts')[0];
+  const form = document.getElementsByClassName('form-control')[0];
+  const addButton = document.getElementsByClassName('btn-primary')[0];
   if (path === 'valid') {
     if (value) {
       input.classList.remove('is-invalid');
@@ -13,6 +15,8 @@ const render = (path, value) => {
     } else {
       input.classList.remove('is-valid');
       input.classList.add('is-invalid');
+      form.readOnly = false;
+      addButton.disabled = false;
     }
     // form.classList.add('was-validated');
   }

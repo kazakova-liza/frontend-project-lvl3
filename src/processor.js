@@ -20,13 +20,8 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
     .then((response) => {
       const parsedRSS = parse(response.data.contents);
       saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
-      form.value = '';
-      form.readOnly = false;
-      addButton.disabled = false;
     })
     .catch((err) => {
-      form.readOnly = false;
-      addButton.disabled = false;
       watchedState.valid = false;
       watchedState.validFeedback = '';
       if (err.errors !== undefined) {
