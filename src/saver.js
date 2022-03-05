@@ -11,6 +11,8 @@ const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance, schema) => {
   let existingPosts;
   const title = RSS.getElementsByTagName('title')[0];
   const description = RSS.getElementsByTagName('description')[0];
+  const form = document.getElementsByClassName('form-control')[0];
+  const addButton = document.getElementsByClassName('btn-primary')[0];
   if (title === undefined || description === undefined) {
     throw (i18nextInstance.t('invalidRss'));
   }
