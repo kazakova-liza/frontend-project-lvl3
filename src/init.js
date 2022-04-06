@@ -23,9 +23,10 @@ const initApp = () => {
     validFeedback: '',
     feeds: [],
     posts: [],
-    showModal: false,
-    currentModalTitle: '',
-    currentModalBody: '',
+    // selectedPostId: null,
+    // showModal: false,
+    // currentModalTitle: '',
+    // currentModalBody: '',
   };
   const i18nextInstance = i18next.createInstance();
   i18nextInstance.init(locale);

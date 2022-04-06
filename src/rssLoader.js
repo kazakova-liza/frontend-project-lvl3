@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const proxifyUrl = (url) => `https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${url}`;
+const proxifyUrl = (url) => `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
 
 const getRSS = (url, i18nextInstance) => {
   const proxifiedUrl = proxifyUrl(url);
