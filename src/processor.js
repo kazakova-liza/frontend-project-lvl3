@@ -4,15 +4,17 @@ import parse from './parser.js';
 import saveRSS from './saver.js';
 
 const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
-  const form = document.getElementsByClassName('form-control')[0];
-  const addButton = document.getElementsByClassName('btn-primary')[0];
-  form.readOnly = true;
-  addButton.disabled = true;
+
+  watchedState.status = 'loading';
+
   validate(url, schema)
     .then(() => {
       if (newFlag) {
         if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
-          throw (i18nextInstance.t('duplicate'));
+          watchedState.status = 'error';
+          console.log('duplicate');
+          watchedState.feedback = i18nextInstance.t('duplicate');
+          throw ('error'); //how to stop executing?
         }
       }
     })
@@ -20,14 +22,15 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
     .then((response) => {
       const parsedRSS = parse(response.data.contents);
       saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
+      watchedState.status = 'success';
     })
     .catch((err) => {
-      watchedState.valid = false;
-      watchedState.validFeedback = '';
+      watchedState.status = 'invalid';
+      watchedState.feedback = '';
       if (err.errors !== undefined) {
-        watchedState.invalidFeedback = err.errors[0];
+        watchedState.feedback = err.errors[0];
       } else {
-        watchedState.invalidFeedback = err;
+        watchedState.feedback = err;
       }
     });
 };

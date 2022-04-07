@@ -18,9 +18,11 @@ const setYup = (i18nextInstance) => {
 
 const initApp = () => {
   const state = {
-    valid: null,
-    invalidFeedback: '',
-    validFeedback: '',
+    status: 'input',
+    feedback: '',
+    // valid: null,
+    // invalidFeedback: '',
+    // validFeedback: '',
     feeds: [],
     posts: [],
     // selectedPostId: null,
