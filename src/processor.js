@@ -5,34 +5,27 @@ import saveRSS from './saver.js';
 
 const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
 
-  watchedState.status = 'loading';
-
-  validate(url, schema)
+  validate(url, schema, newFlag, watchedState)
     .then(() => {
-      if (newFlag) {
-        if (watchedState.feeds.find((feed) => feed.url === url) !== undefined) {
-          watchedState.status = 'error';
-          console.log('duplicate');
-          watchedState.feedback = i18nextInstance.t('duplicate');
-          throw ('error'); //how to stop executing?
-        }
-      }
+      watchedState.status = 'loading';
+      return getRSS(url, i18nextInstance);
     })
-    .then(() => getRSS(url, i18nextInstance))
     .then((response) => {
+      watchedState.status = 'valid';
       const parsedRSS = parse(response.data.contents);
       saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
       watchedState.status = 'success';
+      watchedState.feedback = 'success';
     })
-    .catch((err) => {
-      watchedState.status = 'invalid';
-      watchedState.feedback = '';
-      if (err.errors !== undefined) {
-        watchedState.feedback = err.errors[0];
-      } else {
-        watchedState.feedback = err;
-      }
-    });
+  // .catch((err) => {
+  //   watchedState.status = 'invalid'; //какой тип ошибки?
+  //   watchedState.feedback = '';
+  //   if (err.errors !== undefined) {
+  //     watchedState.feedback = err.errors[0];
+  //   } else {
+  //     watchedState.feedback = err;
+  //   }
+  // });
 };
 
 export default processRss;

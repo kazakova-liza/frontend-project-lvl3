@@ -1,18 +1,19 @@
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
-const render = (path, value) => {
+const render = (path, value, i18nextInstance) => {
   const input = document.getElementsByClassName('form-control')[0];
   const invalidFeedback = document.getElementsByClassName('invalid-feedback')[0];
-  // const validFeedback = document.getElementsByClassName('valid-feedback')[0];
+  const validFeedback = document.getElementsByClassName('valid-feedback')[0];
   const feeds = document.getElementsByClassName('feeds')[0];
   const posts = document.getElementsByClassName('posts')[0];
   const form = document.getElementsByClassName('form-control')[0];
   const addButton = document.getElementsByClassName('btn-primary')[0];
 
   if (path === 'status') {
+    console.log(value);
     switch (value) {
       case 'input': {
-        form.value = '';
+        // form.value = '';
         form.readOnly = false;
         addButton.disabled = false;
         input.classList.remove('is-invalid');
@@ -32,13 +33,13 @@ const render = (path, value) => {
       }
       case 'loading': {
         input.classList.remove('is-invalid');
-        input.classList.remove('is-valid');
+        input.classList.add('is-valid');
         form.readOnly = true;
         addButton.disabled = true;
       }
       case 'success': {
-        // input.classList.add('is-invalid');
-        // input.classList.add('is-valid');
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
         form.readOnly = false;
         addButton.disabled = false;
       }
@@ -51,7 +52,10 @@ const render = (path, value) => {
     }
   }
   if (path === 'feedback') {
-    invalidFeedback.textContent = value;
+    console.log(value);
+    invalidFeedback.textContent = '';
+    validFeedback.textContent = '';
+    value === 'success' ? validFeedback.textContent = i18nextInstance.t('success') : invalidFeedback.textContent = i18nextInstance.t(value);
   }
 
   if (path === 'feeds') {

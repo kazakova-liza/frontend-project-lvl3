@@ -19,21 +19,15 @@ const setYup = (i18nextInstance) => {
 const initApp = () => {
   const state = {
     status: 'input',
-    feedback: '',
-    // valid: null,
-    // invalidFeedback: '',
-    // validFeedback: '',
+    feedback: null,
     feeds: [],
     posts: [],
-    // selectedPostId: null,
-    // showModal: false,
-    // currentModalTitle: '',
-    // currentModalBody: '',
   };
+
   const i18nextInstance = i18next.createInstance();
   i18nextInstance.init(locale);
 
-  const watchedState = onChange(state, (path, value) => render(path, value));
+  const watchedState = onChange(state, (path, value) => render(path, value, i18nextInstance));
 
   setYup(i18nextInstance);
   const schema = yup.string().url();
