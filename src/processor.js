@@ -4,7 +4,6 @@ import parse from './parser.js';
 import saveRSS from './saver.js';
 
 const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
-
   validate(url, schema, newFlag, watchedState)
     .then(() => {
       watchedState.status = 'loading';
@@ -16,7 +15,7 @@ const processRss = (url, newFlag, watchedState, i18nextInstance, schema) => {
       saveRSS(parsedRSS, url, newFlag, watchedState, i18nextInstance, schema);
       watchedState.status = 'success';
       watchedState.feedback = 'success';
-    })
+    });
   // .catch((err) => {
   //   watchedState.status = 'invalid'; //какой тип ошибки?
   //   watchedState.feedback = '';

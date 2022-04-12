@@ -18,36 +18,42 @@ const render = (path, value, i18nextInstance) => {
         addButton.disabled = false;
         input.classList.remove('is-invalid');
         input.classList.remove('is-valid');
+        break;
       }
       case 'valid': {
         input.classList.remove('is-invalid');
         input.classList.add('is-valid');
         form.readOnly = false;
         addButton.disabled = false;
+        break;
       }
       case 'invalid': {
         input.classList.add('is-invalid');
         input.classList.remove('is-valid');
         form.readOnly = false;
         addButton.disabled = false;
+        break;
       }
       case 'loading': {
         input.classList.remove('is-invalid');
         input.classList.add('is-valid');
         form.readOnly = true;
         addButton.disabled = true;
+        break;
       }
       case 'success': {
         input.classList.remove('is-invalid');
         input.classList.add('is-valid');
         form.readOnly = false;
         addButton.disabled = false;
+        break;
       }
       case 'error': {
         input.classList.add('is-invalid');
         input.classList.remove('is-valid');
         form.readOnly = false;
         addButton.disabled = false;
+        break;
       }
     }
   }
