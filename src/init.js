@@ -5,8 +5,12 @@ import onChange from 'on-change';
 import * as yup from 'yup';
 import render from './view.js';
 import 'bootstrap';
-import processRss from './processor.js';
+// import processRss from './processor.js';
 import locale from './utils/locales.js';
+import validate from './validator.js';
+import getRSS from './rssLoader.js';
+import parse from './parser.js';
+import saveRSS from './saver.js';
 
 const setYup = (i18nextInstance) => {
   yup.setLocale({
@@ -30,7 +34,6 @@ const initApp = () => {
   const watchedState = onChange(state, (path, value) => render(path, value, i18nextInstance));
 
   setYup(i18nextInstance);
-  const schema = yup.string().url();
 
   const form = document.getElementsByClassName('form-control')[0];
   const addButton = document.getElementsByClassName('btn-primary')[0];
@@ -40,7 +43,28 @@ const initApp = () => {
     event.stopPropagation();
     const url = form.value;
     console.log(url);
-    processRss(url, true, watchedState, i18nextInstance, schema);
+    validate(url, watchedState.feeds)
+      .then(() => {
+        watchedState.status = 'loading';
+        return getRSS(url, i18nextInstance);
+      })
+      .then((response) => {
+        watchedState.status = 'valid';
+        const parsedRSS = parse(response.data.contents);
+        saveRSS(parsedRSS, url, watchedState, i18nextInstance);
+        watchedState.status = 'success';
+        watchedState.feedback = 'success';
+        // setTimeout(() => processRss(url, false, watchedState, i18nextInstance, schema), 5000);
+      })
+      .catch((err) => {
+        watchedState.status = 'invalid'; // какой тип ошибки?
+        watchedState.feedback = '';
+        if (err.errors !== undefined) {
+          watchedState.feedback = err.errors[0];
+        } else {
+          watchedState.feedback = err;
+        }
+      });
   });
 
   if (watchedState.posts.length > 0) {

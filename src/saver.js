@@ -1,31 +1,25 @@
 import getId from './utils/idGenerator.js';
-import processRss from './processor.js';
 
-const updateRss = (url, watchedState, i18nextInstance, schema) => {
-  processRss(url, false, watchedState, i18nextInstance, schema);
-  setTimeout(() => updateRss(url, watchedState, i18nextInstance, schema), 5000);
-};
-
-const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance, schema) => {
+const saveRSS = (RSS, url, watchedState, i18nextInstance) => {
   let id;
-  let existingPosts;
+  // let existingPosts;
   const title = RSS.getElementsByTagName('title')[0];
   const description = RSS.getElementsByTagName('description')[0];
   if (title === undefined || description === undefined) {
     throw (i18nextInstance.t('invalidRss'));
   }
-  if (newFlag) {
-    id = getId(watchedState);
-    watchedState.feeds.push({
-      id,
-      url,
-      title: title.textContent,
-      description: description.textContent,
-    });
-  } else {
-    id = watchedState.feeds.find((feed) => feed.url === url).id;
-    existingPosts = watchedState.posts.filter((post) => post.id === id);
-  }
+  // if (newFlag) {
+  id = getId(watchedState);
+  watchedState.feeds.push({
+    id,
+    url,
+    title: title.textContent,
+    description: description.textContent,
+  });
+  // } else {
+  //   id = watchedState.feeds.find((feed) => feed.url === url).id;
+  //   existingPosts = watchedState.posts.filter((post) => post.id === id);
+  // }
 
   const items = [...RSS.getElementsByTagName('item')];
 
@@ -41,20 +35,19 @@ const saveRSS = (RSS, url, newFlag, watchedState, i18nextInstance, schema) => {
       viewed: false,
     };
 
-    if (newFlag) {
-      watchedState.posts.push(post);
-    } else {
-      const thisStream = existingPosts.find((stream) => stream.title === postTitle);
-      if (thisStream === undefined) {
-        watchedState.posts.push(post);
-      }
-    }
+    // if (newFlag) {
+    watchedState.posts.push(post);
+    // } else {
+    //   const thisStream = existingPosts.find((stream) => stream.title === postTitle);
+    //   if (thisStream === undefined) {
+    //     watchedState.posts.push(post);
+    //   }
+    // }
   });
-  if (newFlag) {
-    watchedState.status = 'success';
-    watchedState.feedback = 'success';
-    updateRss(url, watchedState, i18nextInstance, schema);
-  }
+  // if (newFlag) {
+  //   watchedState.status = 'success';
+  //   watchedState.feedback = 'success';
+  // }
   // watchedState.status = 'input';
 };
 

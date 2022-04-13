@@ -55,13 +55,19 @@ const render = (path, value, i18nextInstance) => {
         addButton.disabled = false;
         break;
       }
+      default:
+        break;
     }
   }
   if (path === 'feedback') {
     console.log(value);
     invalidFeedback.textContent = '';
     validFeedback.textContent = '';
-    value === 'success' ? validFeedback.textContent = i18nextInstance.t('success') : invalidFeedback.textContent = i18nextInstance.t(value);
+    if (value === 'success') {
+      validFeedback.textContent = i18nextInstance.t('success');
+    } else {
+      invalidFeedback.textContent = i18nextInstance.t(value);
+    }
   }
 
   if (path === 'feeds') {
@@ -110,7 +116,7 @@ const render = (path, value, i18nextInstance) => {
       button.onclick = () => {
         modalTitle.textContent = item.title;
         modalBody.textContent = item.description;
-        item.viewed = true;
+        // item.viewed = true;
         post.classList.remove('fw-bold');
         post.classList.add('fw-normal');
         // console.log(`viewed: ${post.classList}`);

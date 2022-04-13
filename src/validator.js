@@ -1,12 +1,10 @@
-export default (data, schema, newFlag, watchedState) => {
-  if (newFlag) {
-    if (watchedState.feeds.find((feed) => feed.url === data) !== undefined) {
-      watchedState.status = 'error';
-      watchedState.feedback = 'duplicate';
-      // throw ('error');
-    }
-  }
-  if (watchedState.status !== 'error') {
-    return schema.validate(data);
-  }
+import * as yup from 'yup';
+
+
+export default (url, feeds, i18nextInstance) => {
+    const schema = yup
+        .string()
+        .url()
+        .notOneOf(feeds.map((feed) => feed.url), 'duplicate');
+    return schema.validate(url)
 };
