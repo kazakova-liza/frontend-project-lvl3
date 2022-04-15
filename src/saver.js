@@ -1,7 +1,7 @@
 import getId from './utils/idGenerator.js';
 
 const saveRSS = (RSS, url, watchedState, i18nextInstance) => {
-  let id;
+  // let id;
   // let existingPosts;
   const title = RSS.getElementsByTagName('title')[0];
   const description = RSS.getElementsByTagName('description')[0];
@@ -9,7 +9,7 @@ const saveRSS = (RSS, url, watchedState, i18nextInstance) => {
     throw (i18nextInstance.t('invalidRss'));
   }
   // if (newFlag) {
-  id = getId(watchedState);
+  const id = getId(watchedState);
   watchedState.feeds.push({
     id,
     url,

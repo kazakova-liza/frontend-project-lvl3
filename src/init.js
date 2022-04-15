@@ -58,9 +58,9 @@ const initApp = () => {
       })
       .catch((err) => {
         watchedState.status = 'invalid'; // какой тип ошибки?
-        watchedState.feedback = '';
+        watchedState.feedback = null;
         if (err.errors !== undefined) {
-          watchedState.feedback = err.errors[0];
+          [watchedState.feedback] = [err.errors[0]];
         } else {
           watchedState.feedback = err;
         }
