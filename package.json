@@ -5,6 +5,7 @@
   "scripts": {
     "test": "jest --colors"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hexlet-boilerplates/webpack-package.git"
@@ -25,6 +26,7 @@
     "@babel/core": "^7.15.5",
     "@babel/eslint-parser": "^7.15.4",
     "@babel/preset-env": "^7.15.4",
+    "@types/jest": "^27.4.1",
     "babel-jest": "^27.1.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
