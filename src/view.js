@@ -1,58 +1,52 @@
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
-const render = (path, value, i18nextInstance) => {
-  const input = document.getElementsByClassName('form-control')[0];
-  const invalidFeedback = document.getElementsByClassName('invalid-feedback')[0];
-  const validFeedback = document.getElementsByClassName('valid-feedback')[0];
-  const feeds = document.getElementsByClassName('feeds')[0];
-  const posts = document.getElementsByClassName('posts')[0];
-  const form = document.getElementsByClassName('form-control')[0];
-  const addButton = document.getElementsByClassName('btn-primary')[0];
+const render = (path, value, i18nextInstance, elements) => {
+
 
   if (path === 'status') {
     console.log(value);
     switch (value) {
       case 'input': {
         // form.value = '';
-        form.readOnly = false;
-        addButton.disabled = false;
-        input.classList.remove('is-invalid');
-        input.classList.remove('is-valid');
+        elements.form.readOnly = false;
+        elements.addButton.disabled = false;
+        elements.input.classList.remove('is-invalid');
+        elements.input.classList.remove('is-valid');
         break;
       }
       case 'valid': {
-        input.classList.remove('is-invalid');
-        input.classList.add('is-valid');
-        form.readOnly = false;
-        addButton.disabled = false;
+        elements.input.classList.remove('is-invalid');
+        elements.input.classList.add('is-valid');
+        elements.form.readOnly = false;
+        elements.addButton.disabled = false;
         break;
       }
       case 'invalid': {
-        input.classList.add('is-invalid');
-        input.classList.remove('is-valid');
-        form.readOnly = false;
-        addButton.disabled = false;
+        elements.input.classList.add('is-invalid');
+        elements.input.classList.remove('is-valid');
+        elements.form.readOnly = false;
+        elements.addButton.disabled = false;
         break;
       }
       case 'loading': {
-        input.classList.remove('is-invalid');
-        input.classList.add('is-valid');
-        form.readOnly = true;
-        addButton.disabled = true;
+        elements.input.classList.remove('is-invalid');
+        elements.input.classList.add('is-valid');
+        elements.form.readOnly = true;
+        elements.addButton.disabled = true;
         break;
       }
       case 'success': {
-        input.classList.remove('is-invalid');
-        input.classList.add('is-valid');
-        form.readOnly = false;
-        addButton.disabled = false;
+        elements.input.classList.remove('is-invalid');
+        elements.input.classList.add('is-valid');
+        elements.form.readOnly = false;
+        elements.addButton.disabled = false;
         break;
       }
       case 'error': {
-        input.classList.add('is-invalid');
-        input.classList.remove('is-valid');
-        form.readOnly = false;
-        addButton.disabled = false;
+        elements.input.classList.add('is-invalid');
+        elements.input.classList.remove('is-valid');
+        elements.form.readOnly = false;
+        elements.addButton.disabled = false;
         break;
       }
       default:
@@ -61,12 +55,12 @@ const render = (path, value, i18nextInstance) => {
   }
   if (path === 'feedback') {
     console.log(value);
-    invalidFeedback.textContent = '';
-    validFeedback.textContent = '';
+    elements.invalidFeedback.textContent = '';
+    elements.validFeedback.textContent = '';
     if (value === 'success') {
-      validFeedback.textContent = i18nextInstance.t('success');
+      elements.validFeedback.textContent = i18nextInstance.t('success');
     } else {
-      invalidFeedback.textContent = i18nextInstance.t(value);
+      elements.invalidFeedback.textContent = i18nextInstance.t(value);
     }
   }
 

@@ -31,12 +31,22 @@ const initApp = () => {
   const i18nextInstance = i18next.createInstance();
   i18nextInstance.init(locale);
 
-  const watchedState = onChange(state, (path, value) => render(path, value, i18nextInstance));
+  const form = document.getElementsByClassName('form-control')[0];
+  const addButton = document.getElementsByClassName('btn-primary')[0];
+  const input = document.getElementsByClassName('form-control')[0];
+  const invalidFeedback = document.getElementsByClassName('invalid-feedback')[0];
+  const validFeedback = document.getElementsByClassName('valid-feedback')[0];
+  const feeds = document.getElementsByClassName('feeds')[0];
+  const posts = document.getElementsByClassName('posts')[0];
+
+  const elements = {
+    form, addButton, input, invalidFeedback, validFeedback, feeds, posts,
+  }
+  const watchedState = onChange(state, (path, value) => render(path, value, i18nextInstance, elements));
 
   setYup(i18nextInstance);
 
-  const form = document.getElementsByClassName('form-control')[0];
-  const addButton = document.getElementsByClassName('btn-primary')[0];
+
 
   addButton.addEventListener('click', (event) => {
     event.preventDefault();
