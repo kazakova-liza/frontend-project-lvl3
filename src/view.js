@@ -1,52 +1,51 @@
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
 const render = (path, value, i18nextInstance, elements) => {
-
-
+  const { pageElements } = elements;
   if (path === 'status') {
     console.log(value);
     switch (value) {
       case 'input': {
         // form.value = '';
-        elements.form.readOnly = false;
-        elements.addButton.disabled = false;
-        elements.input.classList.remove('is-invalid');
-        elements.input.classList.remove('is-valid');
+        pageElements.form.readOnly = false;
+        pageElements.addButton.disabled = false;
+        pageElements.input.classList.remove('is-invalid');
+        pageElements.input.classList.remove('is-valid');
         break;
       }
       case 'valid': {
-        elements.input.classList.remove('is-invalid');
-        elements.input.classList.add('is-valid');
-        elements.form.readOnly = false;
-        elements.addButton.disabled = false;
+        pageElements.input.classList.remove('is-invalid');
+        pageElements.input.classList.add('is-valid');
+        pageElements.form.readOnly = false;
+        pageElements.addButton.disabled = false;
         break;
       }
       case 'invalid': {
-        elements.input.classList.add('is-invalid');
-        elements.input.classList.remove('is-valid');
-        elements.form.readOnly = false;
-        elements.addButton.disabled = false;
+        pageElements.input.classList.add('is-invalid');
+        pageElements.input.classList.remove('is-valid');
+        pageElements.form.readOnly = false;
+        pageElements.addButton.disabled = false;
         break;
       }
       case 'loading': {
-        elements.input.classList.remove('is-invalid');
-        elements.input.classList.add('is-valid');
-        elements.form.readOnly = true;
-        elements.addButton.disabled = true;
+        pageElements.input.classList.remove('is-invalid');
+        pageElements.input.classList.add('is-valid');
+        pageElements.form.readOnly = true;
+        pageElements.addButton.disabled = true;
         break;
       }
       case 'success': {
-        elements.input.classList.remove('is-invalid');
-        elements.input.classList.add('is-valid');
-        elements.form.readOnly = false;
-        elements.addButton.disabled = false;
+        pageElements.input.classList.remove('is-invalid');
+        pageElements.input.classList.add('is-valid');
+        pageElements.form.readOnly = false;
+        pageElements.addButton.disabled = false;
         break;
       }
       case 'error': {
-        elements.input.classList.add('is-invalid');
-        elements.input.classList.remove('is-valid');
-        elements.form.readOnly = false;
-        elements.addButton.disabled = false;
+        pageElements.input.classList.add('is-invalid');
+        pageElements.input.classList.remove('is-valid');
+        pageElements.form.readOnly = false;
+        pageElements.addButton.disabled = false;
         break;
       }
       default:
@@ -55,17 +54,17 @@ const render = (path, value, i18nextInstance, elements) => {
   }
   if (path === 'feedback') {
     console.log(value);
-    elements.invalidFeedback.textContent = '';
-    elements.validFeedback.textContent = '';
+    pageElements.invalidFeedback.textContent = '';
+    pageElements.validFeedback.textContent = '';
     if (value === 'success') {
-      elements.validFeedback.textContent = i18nextInstance.t('success');
+      pageElements.validFeedback.textContent = i18nextInstance.t('success');
     } else {
-      elements.invalidFeedback.textContent = i18nextInstance.t(value);
+      pageElements.invalidFeedback.textContent = i18nextInstance.t(value);
     }
   }
 
   if (path === 'feeds') {
-    removeAllChildNodes(feeds);
+    removeAllChildNodes(pageElements.feeds);
     value.forEach((item) => {
       const feed = document.createElement('ul');
       feed.className = 'feed';
@@ -75,11 +74,11 @@ const render = (path, value, i18nextInstance, elements) => {
       description.textContent = item.description;
       feed.appendChild(title);
       feed.appendChild(description);
-      feeds.appendChild(feed);
+      pageElements.feeds.appendChild(feed);
     });
   }
   if (path === 'posts') {
-    removeAllChildNodes(posts);
+    removeAllChildNodes(pageElements.posts);
     value.forEach((item) => {
       const list = document.createElement('li');
       list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
@@ -119,7 +118,7 @@ const render = (path, value, i18nextInstance, elements) => {
       list.appendChild(button);
       const divider = document.createElement('br');
       list.appendChild(divider);
-      posts.appendChild(list);
+      pageElements.posts.appendChild(list);
     });
   }
 };

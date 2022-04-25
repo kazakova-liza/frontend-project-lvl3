@@ -41,12 +41,12 @@ const initApp = () => {
 
   const elements = {
     form, addButton, input, invalidFeedback, validFeedback, feeds, posts,
-  }
-  const watchedState = onChange(state, (path, value) => render(path, value, i18nextInstance, elements));
+  };
+
+  const updateView = (path, value) => render(path, value, i18nextInstance, elements);
+  const watchedState = onChange(state, updateView);
 
   setYup(i18nextInstance);
-
-
 
   addButton.addEventListener('click', (event) => {
     event.preventDefault();
