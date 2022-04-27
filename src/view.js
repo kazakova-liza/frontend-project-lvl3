@@ -10,7 +10,7 @@ const render = (path, value, i18nextInstance, elements) => {
     switch (value) {
       case 'input': {
         // form.value = '';
-        pageElements.form.readOnly = false;
+        pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         pageElements.input.classList.remove('is-invalid');
         pageElements.input.classList.remove('is-valid');
@@ -19,35 +19,35 @@ const render = (path, value, i18nextInstance, elements) => {
       case 'valid': {
         pageElements.input.classList.remove('is-invalid');
         pageElements.input.classList.add('is-valid');
-        pageElements.form.readOnly = false;
+        pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
       }
       case 'invalid': {
         pageElements.input.classList.add('is-invalid');
         pageElements.input.classList.remove('is-valid');
-        pageElements.form.readOnly = false;
+        pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
       }
       case 'loading': {
         pageElements.input.classList.remove('is-invalid');
         pageElements.input.classList.add('is-valid');
-        pageElements.form.readOnly = true;
+        pageElements.input.readOnly = true;
         pageElements.addButton.disabled = true;
         break;
       }
       case 'success': {
         pageElements.input.classList.remove('is-invalid');
         pageElements.input.classList.add('is-valid');
-        pageElements.form.readOnly = false;
+        pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
       }
       case 'error': {
         pageElements.input.classList.add('is-invalid');
         pageElements.input.classList.remove('is-valid');
-        pageElements.form.readOnly = false;
+        pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
       }

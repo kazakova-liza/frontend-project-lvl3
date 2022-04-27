@@ -31,7 +31,7 @@ const initApp = () => {
   const i18nextInstance = i18next.createInstance();
   i18nextInstance.init(locale);
 
-  const form = document.getElementsByClassName('form-control')[0];
+  // const form = document.getElementsByClassName('form-control')[0];
   const addButton = document.getElementsByClassName('btn-primary')[0];
   const input = document.getElementsByClassName('form-control')[0];
   const invalidFeedback = document.getElementsByClassName('invalid-feedback')[0];
@@ -40,7 +40,7 @@ const initApp = () => {
   const posts = document.getElementsByClassName('posts')[0];
 
   const elements = {
-    form, addButton, input, invalidFeedback, validFeedback, feeds, posts,
+    addButton, input, invalidFeedback, validFeedback, feeds, posts,
   };
 
   const updateView = (path, value) => render(path, value, i18nextInstance, elements);
@@ -51,7 +51,7 @@ const initApp = () => {
   addButton.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const url = form.value;
+    const url = input.value;
     console.log(url);
     validate(url, watchedState.feeds)
       .then(() => {
