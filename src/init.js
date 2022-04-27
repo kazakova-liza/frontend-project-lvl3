@@ -31,8 +31,7 @@ const initApp = () => {
   const i18nextInstance = i18next.createInstance();
   i18nextInstance.init(locale);
 
-  // const form = document.getElementsByClassName('form-control')[0];
-  const addButton = document.getElementsByClassName('btn-primary')[0];
+  const addButton = document.add;
   const input = document.getElementsByClassName('form-control')[0];
   const invalidFeedback = document.getElementsByClassName('invalid-feedback')[0];
   const validFeedback = document.getElementsByClassName('valid-feedback')[0];
