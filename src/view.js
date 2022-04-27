@@ -1,7 +1,10 @@
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
 const render = (path, value, i18nextInstance, elements) => {
-  const { pageElements } = elements;
+  console.log(elements);
+  // const { pageElements } = elements;
+  const pageElements = { ...elements };
+  console.log(pageElements);
   if (path === 'status') {
     console.log(value);
     switch (value) {
