@@ -31,12 +31,12 @@ const initApp = () => {
   const i18nextInstance = i18next.createInstance();
   i18nextInstance.init(locale);
 
-  const addButton = document.add;
-  const input = document.getElementsByClassName('form-control')[0];
-  const invalidFeedback = document.getElementsByClassName('invalid-feedback')[0];
-  const validFeedback = document.getElementsByClassName('valid-feedback')[0];
-  const feeds = document.getElementsByClassName('feeds')[0];
-  const posts = document.getElementsByClassName('posts')[0];
+  const addButton = document.getElementById('add-button');
+  const input = document.getElementById('rss-input');
+  const invalidFeedback = document.getElementById('invalid-feedback');
+  const validFeedback = document.getElementById('valid-feedback');
+  const feeds = document.getElementById('feeds');
+  const posts = document.getElementById('posts');
 
   const elements = {
     addButton, input, invalidFeedback, validFeedback, feeds, posts,

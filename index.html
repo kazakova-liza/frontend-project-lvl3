@@ -21,15 +21,15 @@
               <div class="col">
                 <form class="rss-input-form" novalidate>
                   <div class="form-group">
-                    <input class="form-control" id="rssInput" required autofocus aria-label='url'
+                    <input class="form-control" id="rss-input" required autofocus aria-label='url'
                       placeholder="Enter url">
-                    <div class="invalid-feedback"></div>
-                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback" id="invalid-feedback"></div>
+                    <div class="valid-feedback" id="valid-feedback"></div>
                   </div>
                 </form>
               </div>
               <div class="col-auto">
-                <button type="submit" class="btn btn-primary" aria-label='add' name='add'>Add</button>
+                <button type="submit" class="btn btn-primary" aria-label='add' id='add-button' name='add'>Add</button>
               </div>
             </div>
             <p class="mt-2 mb-0 text-muted">
@@ -41,9 +41,9 @@
       </section>
       <section class="container-fluid container-xxl p-5">
         <div class="row">
-          <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds">
+          <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds" id="feeds">
           </div>
-          <div class="col-md-10 col-lg-8 order-1 mx-auto posts">
+          <div class="col-md-10 col-lg-8 order-1 mx-auto posts" id="posts">
           </div>
         </div>
       </section>
