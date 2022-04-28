@@ -33,6 +33,7 @@ const initApp = () => {
 
   const addButton = document.getElementById('add-button');
   const input = document.getElementById('rss-input');
+  const form = document.getElementById('rss-input-form');
   const invalidFeedback = document.getElementById('invalid-feedback');
   const validFeedback = document.getElementById('valid-feedback');
   const feeds = document.getElementById('feeds');
@@ -47,9 +48,9 @@ const initApp = () => {
 
   setYup(i18nextInstance);
 
-  addButton.addEventListener('submit', (event) => {
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
-    event.stopPropagation();
+    // event.stopPropagation();
     const url = input.value;
     console.log(url);
     validate(url, watchedState.feeds)
