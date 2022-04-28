@@ -47,7 +47,7 @@ const initApp = () => {
 
   setYup(i18nextInstance);
 
-  addButton.addEventListener('click', (event) => {
+  addButton.addEventListener('submit', (event) => {
     event.preventDefault();
     event.stopPropagation();
     const url = input.value;

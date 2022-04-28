@@ -17,20 +17,23 @@
             <p class="lead">
               Start reading RSS today! It's easy and simple.
             </p>
-            <div class="row">
-              <div class="col">
-                <form class="rss-input-form" novalidate>
-                  <div class="form-group">
-                    <input class="form-control" id="rss-input" required autofocus aria-label='url'
-                      placeholder="Enter url">
-                    <div class="invalid-feedback" id="invalid-feedback"></div>
-                    <div class="valid-feedback" id="valid-feedback"></div>
+            <div>
+              <form class="rss-input-form" novalidate>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input class="form-control" id="rss-input" required autofocus aria-label='url'
+                        placeholder="Enter url">
+                      <div class="invalid-feedback" id="invalid-feedback"></div>
+                      <div class="valid-feedback" id="valid-feedback"></div>
+                    </div>
                   </div>
-                </form>
-              </div>
-              <div class="col-auto">
-                <button type="submit" class="btn btn-primary" aria-label='add' id='add-button' name='add'>Add</button>
-              </div>
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary" aria-label='add' id='add-button'
+                      name='add'>Add</button>
+                  </div>
+                </div>
+              </form>
             </div>
             <p class="mt-2 mb-0 text-muted">
               Example: https://ru.hexlet.io/lessons.rss
