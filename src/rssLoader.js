@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const getRSS = (url, i18nextInstance) => {
+const getRSS = (url) => {
   const proxifiedUrl = new URL(`https://allorigins.hexlet.app/get?disableCache=true&url=${url}`);
-  return axios.get(proxifiedUrl).catch(() => {
-    throw (i18nextInstance.t('networkError'));
-  });
+  return axios.get(proxifiedUrl);
 };
 
 export default getRSS;

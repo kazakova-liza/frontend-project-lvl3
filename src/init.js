@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import render from './view.js';
 import 'bootstrap';
 import locale from './utils/locales.js';
-import validate from './validator.js';
+import validate from './utils/validator.js';
 import getRSS from './rssLoader.js';
 import parse from './parser.js';
 import saveRSS from './saver.js';
@@ -67,11 +67,15 @@ const initApp = () => {
       .catch((err) => {
         watchedState.status = 'invalid';
         watchedState.feedback = null;
-        if (err.errors !== undefined) {
-          [watchedState.feedback] = [err.errors[0]];
+        // if (err.errors !== undefined) {
+        //   [watchedState.feedback] = [err.errors[0]];
+        // } else {
+        if (err.message === 'Network Error') {
+          watchedState.feedback = i18nextInstance.t('networkError');
         } else {
           watchedState.feedback = err;
         }
+        // }
       });
   });
 

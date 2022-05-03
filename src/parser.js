@@ -2,7 +2,6 @@ const parser = new DOMParser();
 
 const parse = (xmlString, i18nextInstance) => {
   const parsedString = parser.parseFromString(xmlString, 'application/xml');
-  console.log(parsedString);
   const title = parsedString.getElementsByTagName('title')[0];
   const description = parsedString.getElementsByTagName('description')[0];
   if (title === undefined || description === undefined) {
