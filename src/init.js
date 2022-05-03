@@ -5,7 +5,6 @@ import onChange from 'on-change';
 import * as yup from 'yup';
 import render from './view.js';
 import 'bootstrap';
-// import processRss from './processor.js';
 import locale from './utils/locales.js';
 import validate from './validator.js';
 import getRSS from './rssLoader.js';
@@ -61,7 +60,7 @@ const initApp = () => {
       .then((response) => {
         watchedState.status = 'valid';
         const parsedRSS = parse(response.data.contents, i18nextInstance);
-        saveRSS(parsedRSS, url, watchedState, i18nextInstance);
+        saveRSS(parsedRSS, url, watchedState);
         watchedState.status = 'success';
         watchedState.feedback = 'success';
         // setTimeout(() => processRss(url, false, watchedState, i18nextInstance, schema), 5000);
