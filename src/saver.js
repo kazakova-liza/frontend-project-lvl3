@@ -1,4 +1,4 @@
-import uniqueId from 'lodash/uniqueId';
+import uniqueId from 'lodash/uniqueId.js';
 
 const saveRSS = (RSS, url, watchedState) => {
   const id = uniqueId();

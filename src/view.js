@@ -1,12 +1,8 @@
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
 const render = (path, value, i18nextInstance, elements) => {
-  console.log(elements);
-  // const { pageElements } = elements;
   const pageElements = { ...elements };
-  console.log(pageElements);
   if (path === 'status') {
-    console.log(value);
     switch (value) {
       case 'input': {
         // form.value = '';
@@ -89,11 +85,9 @@ const render = (path, value, i18nextInstance, elements) => {
       if (item.viewed) {
         post.classList.remove('fw-bold');
         post.classList.add('fw-normal');
-        // console.log(`viewed: ${post.classList}`);
       } else {
         post.classList.remove('fw-normal');
         post.classList.add('fw-bold');
-        // console.log(`not viewed: ${post.classList}`);
       }
       post.href = item.link;
       post.textContent = item.title;
@@ -114,8 +108,6 @@ const render = (path, value, i18nextInstance, elements) => {
         modalBody.textContent = item.description;
         // item.viewed = true;
         post.classList.remove('fw-bold');
-        post.classList.add('fw-normal');
-        // console.log(`viewed: ${post.classList}`);
       };
       list.appendChild(post);
       list.appendChild(button);

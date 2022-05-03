@@ -51,7 +51,6 @@ const initApp = () => {
     event.preventDefault();
     // event.stopPropagation();
     const url = input.value;
-    console.log(url);
     validate(url, watchedState.feeds)
       .then(() => {
         watchedState.status = 'loading';
@@ -66,7 +65,7 @@ const initApp = () => {
         // setTimeout(() => processRss(url, false, watchedState, i18nextInstance, schema), 5000);
       })
       .catch((err) => {
-        watchedState.status = 'invalid'; // какой тип ошибки?
+        watchedState.status = 'invalid';
         watchedState.feedback = null;
         if (err.errors !== undefined) {
           [watchedState.feedback] = [err.errors[0]];
@@ -89,7 +88,5 @@ const initApp = () => {
     });
   }
 };
-
-// initApp();
 
 export default initApp;
