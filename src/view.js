@@ -99,8 +99,8 @@ const render = (path, value, i18nextInstance, elements) => {
       post.textContent = item.title;
 
       const button = document.createElement('button');
-      button.name = 'Просмотр';
-      button.textContent = 'Просмотр';
+      button.name = i18nextInstance.t('viewButton');
+      button.textContent = i18nextInstance.t('viewButton');
       button.classList.add('btn', 'btn-primary', 'btn-view');
       button.dataset.bsTarget = '#previewModal';
       button.dataset.bsToggle = 'modal';

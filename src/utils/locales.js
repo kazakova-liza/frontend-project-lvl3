@@ -9,6 +9,7 @@ export default {
         success: 'RSS has been successfully added',
         invalidRss: 'URL has no valid RSS',
         networkError: 'Nerwork error. Please, try again',
+        viewButton: 'View',
       },
     },
     ru: {
@@ -18,6 +19,7 @@ export default {
         success: 'RSS успешно загружен',
         invalidRss: 'Ресурс не содержит валидный RSS',
         networkError: 'Ошибка сети',
+        viewButton: 'Просмотр',
       },
     },
   },
