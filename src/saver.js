@@ -1,7 +1,7 @@
-import getId from './utils/idGenerator.js';
+import uniqueId from 'lodash/uniqueId';
 
 const saveRSS = (RSS, url, watchedState) => {
-  const id = getId(watchedState);
+  const id = uniqueId();
   watchedState.feeds.push({
     id,
     url,
