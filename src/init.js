@@ -60,7 +60,7 @@ const initApp = () => {
       })
       .then((response) => {
         watchedState.status = 'valid';
-        const parsedRSS = parse(response.data.contents);
+        const parsedRSS = parse(response.data.contents, i18nextInstance);
         saveRSS(parsedRSS, url, watchedState, i18nextInstance);
         watchedState.status = 'success';
         watchedState.feedback = 'success';
