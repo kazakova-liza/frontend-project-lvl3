@@ -5,7 +5,7 @@ import onChange from 'on-change';
 import * as yup from 'yup';
 import render from './view.js';
 import 'bootstrap';
-import locale from './utils/locales.js';
+import ru from './locales/ru.js';
 import validate from './utils/validator.js';
 import getRSS from './rssLoader.js';
 import parse from './parser.js';
@@ -28,7 +28,7 @@ const initApp = () => {
   };
 
   const i18nextInstance = i18next.createInstance();
-  i18nextInstance.init(locale);
+  i18nextInstance.init(ru);
 
   const addButton = document.getElementById('add-button');
   const input = document.getElementById('rss-input');
