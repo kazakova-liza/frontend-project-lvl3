@@ -2,8 +2,8 @@ const parser = new DOMParser();
 
 const parse = (xmlString, i18nextInstance) => {
   const parsedString = parser.parseFromString(xmlString, 'application/xml');
-  const title = parsedString.getElementsByTagName('title')[0];
-  const description = parsedString.getElementsByTagName('description')[0];
+  const title = parsedString.querySelector('title');
+  const description = parsedString.querySelector('description');
   if (title === undefined || description === undefined) {
     throw (i18nextInstance.t('invalidRss'));
   }
