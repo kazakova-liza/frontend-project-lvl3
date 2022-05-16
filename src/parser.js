@@ -2,11 +2,12 @@ const parser = new DOMParser();
 
 const parse = (xmlString, i18nextInstance) => {
   const parsedString = parser.parseFromString(xmlString, 'application/xml');
-  const title = parsedString.querySelector('title');
-  const description = parsedString.querySelector('description');
-  if (title === undefined || description === undefined) {
+  const parserError = parsedString.querySelector('parsererror');
+  if (parserError) {
     throw (i18nextInstance.t('invalidRss'));
   }
+  const title = parsedString.querySelector('title');
+  const description = parsedString.querySelector('description');
   const items = [...parsedString.getElementsByTagName('item')];
 
   const posts = items.map((item) => {
