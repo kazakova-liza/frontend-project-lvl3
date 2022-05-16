@@ -7,7 +7,7 @@ import render from './view.js';
 import 'bootstrap';
 import ru from './locales/ru.js';
 import validate from './utils/validator.js';
-import getRSS from './rssLoader.js';
+import proxify from './proxify.js';
 import parse from './parser.js';
 import saveRSS from './saver.js';
 
@@ -54,7 +54,7 @@ const initApp = () => {
     validate(url, watchedState.feeds)
       .then(() => {
         watchedState.status = 'loading';
-        return getRSS(url, i18nextInstance);
+        return proxify(url);
       })
       .then((response) => {
         watchedState.status = 'valid';
