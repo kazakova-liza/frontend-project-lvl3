@@ -3,6 +3,7 @@
 import i18next from 'i18next';
 import onChange from 'on-change';
 import * as yup from 'yup';
+import axios from 'axios';
 import render from './view.js';
 import 'bootstrap';
 import ru from './locales/ru.js';
@@ -54,7 +55,9 @@ const initApp = () => {
     validate(url, watchedState.feeds)
       .then(() => {
         watchedState.status = 'loading';
-        return proxify(url);
+        const proxifiedUrl = proxify(url);
+        return axios.get(proxifiedUrl);
+        // return proxify(url);
       })
       .then((response) => {
         watchedState.status = 'valid';
