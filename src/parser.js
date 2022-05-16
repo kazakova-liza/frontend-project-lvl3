@@ -14,11 +14,11 @@ const parse = (xmlString, i18nextInstance) => {
     const postTitle = item.querySelector('title').textContent;
     const link = item.querySelector('link').textContent;
     const postDescription = item.querySelector('description').textContent;
+
     return {
       title: postTitle,
       link,
       description: postDescription,
-      viewed: false,
     };
   });
 
