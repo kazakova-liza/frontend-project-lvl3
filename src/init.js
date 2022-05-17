@@ -50,14 +50,15 @@ const initApp = () => {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    // event.stopPropagation();
+    event.stopPropagation();
+    // const formData = new FormData();
+    // formData.append('url', input.value);
     const url = input.value;
     validate(url, watchedState.feeds)
       .then(() => {
         watchedState.status = 'loading';
         const proxifiedUrl = proxify(url);
         return axios.get(proxifiedUrl);
-        // return proxify(url);
       })
       .then((response) => {
         watchedState.status = 'valid';
@@ -65,6 +66,7 @@ const initApp = () => {
         saveRSS(parsedRSS, url, watchedState);
         watchedState.status = 'success';
         watchedState.feedback = 'success';
+        input.value = '';
         // setTimeout(() => processRss(url, false, watchedState, i18nextInstance, schema), 5000);
       })
       .catch((err) => {
