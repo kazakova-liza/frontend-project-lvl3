@@ -51,9 +51,9 @@ const initApp = () => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    // const formData = new FormData();
-    // formData.append('url', input.value);
-    const url = input.value;
+    // console.log(event.target);
+    const formData = new FormData(event.target);
+    const url = formData.get('url');
     validate(url, watchedState.feeds)
       .then(() => {
         watchedState.status = 'loading';
