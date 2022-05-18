@@ -71,11 +71,11 @@ const initApp = () => {
       })
       .catch((err) => {
         watchedState.status = 'invalid';
-        watchedState.feedback = null;
+        // watchedState.feedback = null;
         if (err.name === 'ValidationError') {
           [watchedState.feedback] = [err.errors[0]];
         } else if (err.message === 'Network Error') {
-          watchedState.feedback = i18nextInstance.t('networkError');
+          watchedState.feedback = 'networkError';
         } else {
           watchedState.feedback = err;
         }

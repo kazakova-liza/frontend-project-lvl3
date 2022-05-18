@@ -3,6 +3,8 @@ import removeAllChildNodes from './utils/removeAllChildNodes.js';
 const render = (path, value, i18nextInstance, elements) => {
   const pageElements = { ...elements };
   if (path === 'status') {
+    // pageElements.invalidFeedback.textContent = '';
+    // pageElements.validFeedback.textContent = '';
     switch (value) {
       case 'input': {
         // form.value = '';
@@ -38,6 +40,7 @@ const render = (path, value, i18nextInstance, elements) => {
         pageElements.input.classList.add('is-valid');
         pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
+        // pageElements.validFeedback.textContent = i18nextInstance.t('success');
         break;
       }
       case 'error': {
@@ -51,8 +54,8 @@ const render = (path, value, i18nextInstance, elements) => {
         break;
     }
   }
+
   if (path === 'feedback') {
-    console.log(value);
     pageElements.invalidFeedback.textContent = '';
     pageElements.validFeedback.textContent = '';
     if (value === 'success') {
