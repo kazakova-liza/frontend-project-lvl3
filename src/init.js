@@ -84,7 +84,7 @@ const initApp = () => {
   });
 
   if (watchedState.posts.length > 0) {
-    const viewButtons = document.getElementsByClassName('btn-view');
+    const viewButtons = document.querySelectorAll('.btn-view');
     [...viewButtons].forEach((button) => {
       button.addEventListener('click', (event) => {
         event.preventDefault();
