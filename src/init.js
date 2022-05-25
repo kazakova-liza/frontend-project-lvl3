@@ -22,12 +22,12 @@ const setYup = (i18nextInstance) => {
 
 const initApp = () => {
   const state = {
-    status: 'input',
-    feedback: null,
     feeds: [],
     posts: [],
     ui: {
       viewedPosts: [],
+      status: 'input',
+      feedback: null,
     },
   };
 
@@ -59,28 +59,28 @@ const initApp = () => {
     const url = formData.get('url');
     validate(url, watchedState.feeds)
       .then(() => {
-        watchedState.status = 'loading';
+        watchedState.ui.status = 'loading';
         const proxifiedUrl = proxify(url);
         return axios.get(proxifiedUrl);
       })
       .then((response) => {
-        watchedState.status = 'valid';
+        watchedState.ui.status = 'valid';
         const parsedRSS = parse(response.data.contents, i18nextInstance);
         saveRSS(parsedRSS, url, watchedState);
-        watchedState.status = 'success';
-        watchedState.feedback = 'success';
+        watchedState.ui.status = 'success';
+        watchedState.ui.feedback = 'success';
         input.value = '';
         // setTimeout(() => processRss(url, false, watchedState, i18nextInstance, schema), 5000);
       })
       .catch((err) => {
-        watchedState.status = 'invalid';
+        watchedState.ui.status = 'invalid';
         // watchedState.feedback = null;
         if (err.name === 'ValidationError') {
-          [watchedState.feedback] = [err.errors[0]];
+          [watchedState.ui.feedback] = [err.errors[0]];
         } else if (err.message === 'Network Error') {
-          watchedState.feedback = 'networkError';
+          watchedState.ui.feedback = 'networkError';
         } else {
-          watchedState.feedback = err;
+          watchedState.ui.feedback = err;
         }
         // }
       });
@@ -89,8 +89,9 @@ const initApp = () => {
   const postsContainer = document.getElementById('posts');
   postsContainer.addEventListener('click', (event) => {
     const { postId } = event.target.dataset;
-    const thisPost = watchedState.posts.find((post) => post.id === postId);
-    thisPost.viewed = true;
+    watchedState.ui.viewedPosts.push(postId);
+    // const thisPost = watchedState.posts.find((post) => post.id === postId);
+    // thisPost.viewed = true;
   });
 };
 

@@ -1,8 +1,9 @@
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
 const render = (path, value, i18nextInstance, elements) => {
+  // console.log(path);
   const pageElements = { ...elements };
-  if (path === 'status') {
+  if (path === 'ui.status') {
     // pageElements.invalidFeedback.textContent = '';
     // pageElements.validFeedback.textContent = '';
     switch (value) {
@@ -55,7 +56,7 @@ const render = (path, value, i18nextInstance, elements) => {
     }
   }
 
-  if (path === 'feedback') {
+  if (path === 'ui.feedback') {
     pageElements.invalidFeedback.textContent = '';
     pageElements.validFeedback.textContent = '';
     if (value === 'success') {
@@ -79,22 +80,25 @@ const render = (path, value, i18nextInstance, elements) => {
       pageElements.feeds.appendChild(feed);
     });
   }
+
+  if (path === 'ui.viewedPosts') {
+    value.forEach((id) => {
+      const thisPost = document.getElementById(id);
+      thisPost.classList.remove('fw-bold');
+      thisPost.classList.add('fw-normal');
+    });
+  }
+
   if (path === 'posts') {
     removeAllChildNodes(pageElements.posts);
     value.forEach((item) => {
-      console.log(item);
       const list = document.createElement('li');
       list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
       const post = document.createElement('a');
-      if (item.viewed) {
-        post.classList.remove('fw-bold');
-        post.classList.add('fw-normal');
-      } else {
-        post.classList.remove('fw-normal');
-        post.classList.add('fw-bold');
-      }
+      post.classList.add('fw-bold');
       post.href = item.link;
       post.textContent = item.title;
+      post.id = item.id;
 
       const button = document.createElement('button');
       button.name = i18nextInstance.t('viewButton');
@@ -104,14 +108,11 @@ const render = (path, value, i18nextInstance, elements) => {
       button.dataset.bsToggle = 'modal';
       button.dataset.postId = item.id;
       button.classList.add('btn-secondary');
-      const thisPost = value.find((stream) => stream.title === item.title);
-      button.id = thisPost.id;
-      const modalTitle = document.getElementsByClassName('modal-title')[0];
-      const modalBody = document.getElementsByClassName('modal-body')[0];
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
       button.onclick = () => {
         modalTitle.textContent = item.title;
         modalBody.textContent = item.description;
-        // item.viewed = true;
         post.classList.remove('fw-bold');
       };
       list.appendChild(post);
