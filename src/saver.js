@@ -9,7 +9,9 @@ const saveRSS = (RSS, url, watchedState) => {
     description: RSS.description,
   });
   const posts = [];
-  RSS.posts.forEach((item) => posts.push({ id, ...item, viewed: false }));
+  RSS.posts.forEach((item) => posts.push({
+    feedId: id, ...item, viewed: false, id: uniqueId(),
+  }));
   watchedState.posts.push(...posts);
 };
 

@@ -82,6 +82,7 @@ const render = (path, value, i18nextInstance, elements) => {
   if (path === 'posts') {
     removeAllChildNodes(pageElements.posts);
     value.forEach((item) => {
+      console.log(item);
       const list = document.createElement('li');
       list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
       const post = document.createElement('a');
@@ -101,6 +102,7 @@ const render = (path, value, i18nextInstance, elements) => {
       button.classList.add('btn', 'btn-primary', 'btn-view');
       button.dataset.bsTarget = '#previewModal';
       button.dataset.bsToggle = 'modal';
+      button.dataset.postId = item.id;
       button.classList.add('btn-secondary');
       const thisPost = value.find((stream) => stream.title === item.title);
       button.id = thisPost.id;

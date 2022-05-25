@@ -26,6 +26,9 @@ const initApp = () => {
     feedback: null,
     feeds: [],
     posts: [],
+    ui: {
+      viewedPosts: [],
+    },
   };
 
   const i18nextInstance = i18next.createInstance();
@@ -83,18 +86,12 @@ const initApp = () => {
       });
   });
 
-  if (watchedState.posts.length > 0) {
-    const viewButtons = document.querySelectorAll('.btn-view');
-    [...viewButtons].forEach((button) => {
-      button.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const { id } = event.value;
-        const thisPost = watchedState.posts.find((post) => post.id === id);
-        thisPost.viewed = true;
-      });
-    });
-  }
+  const postsContainer = document.getElementById('posts');
+  postsContainer.addEventListener('click', (event) => {
+    const { postId } = event.target.dataset;
+    const thisPost = watchedState.posts.find((post) => post.id === postId);
+    thisPost.viewed = true;
+  });
 };
 
 export default initApp;
