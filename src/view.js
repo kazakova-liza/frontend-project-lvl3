@@ -4,8 +4,6 @@ const render = (path, value, i18nextInstance, elements) => {
   // console.log(path);
   const pageElements = { ...elements };
   if (path === 'ui.status') {
-    // pageElements.invalidFeedback.textContent = '';
-    // pageElements.validFeedback.textContent = '';
     switch (value) {
       case 'input': {
         // form.value = '';
@@ -41,7 +39,6 @@ const render = (path, value, i18nextInstance, elements) => {
         pageElements.input.classList.add('is-valid');
         pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
-        // pageElements.validFeedback.textContent = i18nextInstance.t('success');
         break;
       }
       case 'error': {
@@ -89,6 +86,20 @@ const render = (path, value, i18nextInstance, elements) => {
     });
   }
 
+  if (path === 'ui.currentPostId') {
+    if (value === null) {
+      //what do we do?
+    }
+    else {
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+      const thisPost = document.getElementById(value);
+      modalTitle.textContent = thisPost.textContent;
+      modalBody.textContent = thisPost.dataset.description;
+
+    }
+  }
+
   if (path === 'posts') {
     removeAllChildNodes(pageElements.posts);
     value.forEach((item) => {
@@ -99,6 +110,7 @@ const render = (path, value, i18nextInstance, elements) => {
       post.href = item.link;
       post.textContent = item.title;
       post.id = item.id;
+      post.dataset.description = item.description;
 
       const button = document.createElement('button');
       button.name = i18nextInstance.t('viewButton');
@@ -108,13 +120,6 @@ const render = (path, value, i18nextInstance, elements) => {
       button.dataset.bsToggle = 'modal';
       button.dataset.postId = item.id;
       button.classList.add('btn-secondary');
-      const modalTitle = document.getElementById('modal-title');
-      const modalBody = document.getElementById('modal-body');
-      button.onclick = () => {
-        modalTitle.textContent = item.title;
-        modalBody.textContent = item.description;
-        post.classList.remove('fw-bold');
-      };
       list.appendChild(post);
       list.appendChild(button);
       const divider = document.createElement('br');

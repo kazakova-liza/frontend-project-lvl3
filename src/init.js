@@ -28,6 +28,7 @@ const initApp = () => {
       viewedPosts: [],
       status: 'input',
       feedback: null,
+      currentPostId: null,
     },
   };
 
@@ -74,7 +75,7 @@ const initApp = () => {
       })
       .catch((err) => {
         watchedState.ui.status = 'invalid';
-        // watchedState.feedback = null;
+        console.log(err.isAxiosError);
         if (err.name === 'ValidationError') {
           [watchedState.ui.feedback] = [err.errors[0]];
         } else if (err.message === 'Network Error') {
@@ -90,8 +91,7 @@ const initApp = () => {
   postsContainer.addEventListener('click', (event) => {
     const { postId } = event.target.dataset;
     watchedState.ui.viewedPosts.push(postId);
-    // const thisPost = watchedState.posts.find((post) => post.id === postId);
-    // thisPost.viewed = true;
+    watchedState.ui.currentPostId = postId;
   });
 };
 
