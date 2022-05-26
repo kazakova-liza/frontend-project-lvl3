@@ -12,10 +12,10 @@ import proxify from './proxify.js';
 import parse from './parser.js';
 import saveRSS from './saver.js';
 
-const setYup = (i18nextInstance) => {
+const setYup = () => {
   yup.setLocale({
     string: {
-      url: i18nextInstance.t('invalidUrl'),
+      url: 'invalidUrl',
     },
   });
 };
@@ -50,7 +50,7 @@ const initApp = () => {
   const updateView = (path, value) => render(path, value, i18nextInstance, elements);
   const watchedState = onChange(state, updateView);
 
-  setYup(i18nextInstance);
+  setYup();
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -75,7 +75,6 @@ const initApp = () => {
       })
       .catch((err) => {
         watchedState.ui.status = 'invalid';
-        console.log(err);
         if (err.name === 'ValidationError') {
           [watchedState.ui.feedback] = [err.errors[0]];
         } else if (err.isAxiosError) {
