@@ -7,7 +7,7 @@ export default {
         duplicate: 'RSS уже существует',
         invalidUrl: 'Ссылка должна быть валидным URL',
         success: 'RSS успешно загружен',
-        invalidRss: 'Ресурс не содержит валидный RSS',
+        parsingError: 'Ресурс не содержит валидный RSS',
         networkError: 'Ошибка сети',
         viewButton: 'Просмотр',
       },

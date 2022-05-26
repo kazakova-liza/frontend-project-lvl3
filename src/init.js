@@ -79,6 +79,8 @@ const initApp = () => {
           [watchedState.ui.feedback] = [err.errors[0]];
         } else if (err.isAxiosError) {
           watchedState.ui.feedback = 'networkError';
+        } else if (err.isParsingError) {
+          watchedState.ui.feedback = 'parsingError';
         } else {
           watchedState.ui.feedback = err;
         }

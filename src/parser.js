@@ -1,10 +1,12 @@
 const parser = new DOMParser();
 
-const parse = (xmlString, i18nextInstance) => {
+const parse = (xmlString) => {
   const parsedString = parser.parseFromString(xmlString, 'application/xml');
   const parserError = parsedString.querySelector('parsererror');
   if (parserError) {
-    throw (i18nextInstance.t('invalidRss'));
+    const error = new Error('parsingError');
+    error.isParsingError = true;
+    throw error;
   }
   const title = parsedString.querySelector('title').textContent;
   const description = parsedString.querySelector('description').textContent;
