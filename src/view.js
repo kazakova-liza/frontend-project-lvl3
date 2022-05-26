@@ -88,15 +88,13 @@ const render = (path, value, i18nextInstance, elements) => {
 
   if (path === 'ui.currentPostId') {
     if (value === null) {
-      //what do we do?
-    }
-    else {
+      // what do we do?
+    } else {
       const modalTitle = document.getElementById('modal-title');
       const modalBody = document.getElementById('modal-body');
       const thisPost = document.getElementById(value);
       modalTitle.textContent = thisPost.textContent;
       modalBody.textContent = thisPost.dataset.description;
-
     }
   }
 
