@@ -75,10 +75,10 @@ const initApp = () => {
       })
       .catch((err) => {
         watchedState.ui.status = 'invalid';
-        console.log(err.isAxiosError);
+        console.log(err);
         if (err.name === 'ValidationError') {
           [watchedState.ui.feedback] = [err.errors[0]];
-        } else if (err.message === 'Network Error') {
+        } else if (err.isAxiosError) {
           watchedState.ui.feedback = 'networkError';
         } else {
           watchedState.ui.feedback = err;
