@@ -123,6 +123,7 @@ const render = (path, value, i18nextInstance, elements) => {
       const divider = document.createElement('br');
       list.appendChild(divider);
       pageElements.posts.appendChild(list);
+
     });
   }
 };
