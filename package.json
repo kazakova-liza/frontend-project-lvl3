@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "test": "jest --colors"
+    "test": "jest --colors",
+    "start": "webpack serve",
+    "build": "NODE_ENV=production webpack"
   },
   "type": "module",
   "repository": {
