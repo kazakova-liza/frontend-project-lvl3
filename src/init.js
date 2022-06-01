@@ -11,6 +11,7 @@ import validate from './utils/validator.js';
 import proxify from './proxify.js';
 import parse from './parser.js';
 import saveRSS from './saver.js';
+import updateFeeds from './update.js';
 
 const setYup = () => {
   yup.setLocale({
@@ -55,7 +56,6 @@ const initApp = () => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    // console.log(event.target);
     const formData = new FormData(event.target);
     const url = formData.get('url');
     validate(url, watchedState.feeds)
@@ -71,7 +71,7 @@ const initApp = () => {
         watchedState.ui.status = 'success';
         watchedState.ui.feedback = 'success';
         input.value = '';
-        // setTimeout(() => processRss(url, false, watchedState, i18nextInstance, schema), 5000);
+        setInterval(() => updateFeeds(watchedState), 5000);
       })
       .catch((err) => {
         watchedState.ui.status = 'invalid';
