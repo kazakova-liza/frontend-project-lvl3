@@ -26,7 +26,7 @@ const initApp = () => {
     feeds: [],
     posts: [],
     ui: {
-      viewedPosts: [],
+      viewedPosts: new Set(),
       status: 'input',
       feedback: null,
       currentPostId: null,
@@ -91,7 +91,7 @@ const initApp = () => {
   const postsContainer = document.getElementById('posts');
   postsContainer.addEventListener('click', (event) => {
     const { postId } = event.target.dataset;
-    watchedState.ui.viewedPosts.push(postId);
+    watchedState.ui.viewedPosts.add(postId);
     watchedState.ui.currentPostId = postId;
   });
 };

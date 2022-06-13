@@ -99,7 +99,9 @@ const render = (path, value, i18nextInstance, elements, state) => {
       const list = document.createElement('li');
       list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
       const post = document.createElement('a');
-      post.classList.add('fw-bold');
+      if (!state.ui.viewedPosts.has(item.id)) {
+        post.classList.add('fw-bold');
+      }
       post.href = item.link;
       post.textContent = item.title;
       post.id = item.id;
