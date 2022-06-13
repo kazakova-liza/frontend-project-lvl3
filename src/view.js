@@ -1,7 +1,6 @@
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
-const render = (path, value, i18nextInstance, elements) => {
-  // console.log(path);
+const render = (path, value, i18nextInstance, elements, state) => {
   const pageElements = { ...elements };
   if (path === 'ui.status') {
     switch (value) {
@@ -87,15 +86,11 @@ const render = (path, value, i18nextInstance, elements) => {
   }
 
   if (path === 'ui.currentPostId') {
-    if (value === null) {
-      // what do we do?
-    } else {
-      const modalTitle = document.getElementById('modal-title');
-      const modalBody = document.getElementById('modal-body');
-      const thisPost = document.getElementById(value);
-      modalTitle.textContent = thisPost.textContent;
-      modalBody.textContent = thisPost.dataset.description;
-    }
+    const thisPost = state.posts.find((post) => post.id === value);
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    modalTitle.textContent = thisPost.title;
+    modalBody.textContent = thisPost.description;
   }
 
   if (path === 'posts') {

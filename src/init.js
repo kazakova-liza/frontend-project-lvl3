@@ -48,7 +48,7 @@ const initApp = () => {
     addButton, input, invalidFeedback, validFeedback, feeds, posts,
   };
 
-  const updateView = (path, value) => render(path, value, i18nextInstance, elements);
+  const updateView = (path, value) => render(path, value, i18nextInstance, elements, state);
   const watchedState = onChange(state, updateView);
 
   setYup();
