@@ -20,7 +20,7 @@ const setYup = () => {
     },
     mixed: {
       required: 'required',
-    }
+    },
   });
 };
 
@@ -42,13 +42,12 @@ const initApp = () => {
   const addButton = document.getElementById('add-button');
   const input = document.getElementById('rss-input');
   const form = document.getElementById('rss-input-form');
-  const invalidFeedback = document.getElementById('invalid-feedback');
-  const validFeedback = document.getElementById('valid-feedback');
+  const feedback = document.getElementById('feedback');
   const feeds = document.getElementById('feeds');
   const posts = document.getElementById('posts');
 
   const elements = {
-    addButton, input, invalidFeedback, validFeedback, feeds, posts,
+    addButton, input, feedback, feeds, posts,
   };
 
   const updateView = (path, value) => render(path, value, i18nextInstance, elements, state);

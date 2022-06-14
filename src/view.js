@@ -5,44 +5,37 @@ const render = (path, value, i18nextInstance, elements, state) => {
   if (path === 'ui.status') {
     switch (value) {
       case 'input': {
-        // form.value = '';
         pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
-        pageElements.input.classList.remove('is-invalid');
-        pageElements.input.classList.remove('is-valid');
+        pageElements.feedback.classList.remove('text-danger');
         break;
       }
       case 'valid': {
-        pageElements.input.classList.remove('is-invalid');
-        pageElements.input.classList.add('is-valid');
+        pageElements.feedback.classList.remove('text-danger');
         pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
       }
       case 'invalid': {
-        pageElements.input.classList.add('is-invalid');
-        pageElements.input.classList.remove('is-valid');
+        pageElements.feedback.classList.add('text-danger');
         pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
       }
       case 'loading': {
-        pageElements.input.classList.remove('is-invalid');
-        pageElements.input.classList.add('is-valid');
+        pageElements.feedback.classList.remove('text-danger');
         pageElements.input.readOnly = true;
         pageElements.addButton.disabled = true;
         break;
       }
       case 'success': {
-        pageElements.input.classList.remove('is-invalid');
-        pageElements.input.classList.add('is-valid');
+        pageElements.feedback.classList.remove('text-danger');
         pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
       }
       case 'error': {
-        pageElements.input.classList.add('is-invalid');
-        pageElements.input.classList.remove('is-valid');
+        pageElements.feedback.classList.add('text-danger');
         pageElements.input.readOnly = false;
         pageElements.addButton.disabled = false;
         break;
@@ -53,12 +46,12 @@ const render = (path, value, i18nextInstance, elements, state) => {
   }
 
   if (path === 'ui.feedback') {
-    pageElements.invalidFeedback.textContent = '';
-    pageElements.validFeedback.textContent = '';
+    pageElements.feedback.textContent = '';
+    pageElements.feedback.textContent = '';
     if (value === 'success') {
-      pageElements.validFeedback.textContent = i18nextInstance.t('success');
+      pageElements.feedback.textContent = i18nextInstance.t('success');
     } else {
-      pageElements.invalidFeedback.textContent = i18nextInstance.t(value);
+      pageElements.feedback.textContent = i18nextInstance.t(value);
     }
   }
 
