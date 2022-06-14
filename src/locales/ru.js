@@ -10,6 +10,7 @@ export default {
         parsingError: 'Ресурс не содержит валидный RSS',
         networkError: 'Ошибка сети',
         viewButton: 'Просмотр',
+        required: 'Это поле не должно быть пустым'
       },
     },
   },

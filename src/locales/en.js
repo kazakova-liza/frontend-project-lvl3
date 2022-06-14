@@ -10,6 +10,7 @@ export default {
         parsingError: 'URL has no valid RSS',
         networkError: 'Nerwork error. Please, try again',
         viewButton: 'View',
+        required: 'This field is required',
       },
     },
   },

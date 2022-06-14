@@ -18,6 +18,9 @@ const setYup = () => {
     string: {
       url: 'invalidUrl',
     },
+    mixed: {
+      required: 'required',
+    }
   });
 };
 
