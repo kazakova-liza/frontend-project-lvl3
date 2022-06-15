@@ -1,3 +1,14 @@
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   color: black;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex: 0 0 auto;
 }

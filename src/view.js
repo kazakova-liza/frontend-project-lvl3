@@ -58,8 +58,8 @@ const render = (path, value, i18nextInstance, elements, state) => {
   if (path === 'feeds') {
     removeAllChildNodes(pageElements.feeds);
     value.forEach((item) => {
-      const feed = document.createElement('ul');
-      feed.className = 'feed';
+      const feed = document.createElement('li');
+      feed.classList.add('feed', 'list-group-item', 'border-0', 'border-end-0');
       const title = document.createElement('h3');
       title.classList.add('h6', 'm-0');
       title.textContent = item.title;
@@ -112,8 +112,6 @@ const render = (path, value, i18nextInstance, elements, state) => {
       button.dataset.postId = item.id;
       list.appendChild(post);
       list.appendChild(button);
-      const divider = document.createElement('br');
-      list.appendChild(divider);
       pageElements.posts.appendChild(list);
     });
   }
