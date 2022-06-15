@@ -61,8 +61,10 @@ const render = (path, value, i18nextInstance, elements, state) => {
       const feed = document.createElement('ul');
       feed.className = 'feed';
       const title = document.createElement('h3');
+      title.classList.add('h6', 'm-0');
       title.textContent = item.title;
-      const description = document.createElement('i');
+      const description = document.createElement('p');
+      description.classList.add('m-0', 'small', 'text-black-50');
       description.textContent = item.description;
       feed.appendChild(title);
       feed.appendChild(description);
@@ -90,7 +92,7 @@ const render = (path, value, i18nextInstance, elements, state) => {
     removeAllChildNodes(pageElements.posts);
     value.forEach((item) => {
       const list = document.createElement('li');
-      list.classList.add('d-flex', 'justify-content-between', 'align-items-start');
+      list.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
       const post = document.createElement('a');
       if (!state.ui.viewedPosts.has(item.id)) {
         post.classList.add('fw-bold');
@@ -103,11 +105,11 @@ const render = (path, value, i18nextInstance, elements, state) => {
       const button = document.createElement('button');
       button.name = i18nextInstance.t('viewButton');
       button.textContent = i18nextInstance.t('viewButton');
-      button.classList.add('btn', 'btn-primary', 'btn-view');
+
+      button.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'mr-2');
       button.dataset.bsTarget = '#previewModal';
       button.dataset.bsToggle = 'modal';
       button.dataset.postId = item.id;
-      button.classList.add('btn-secondary');
       list.appendChild(post);
       list.appendChild(button);
       const divider = document.createElement('br');
