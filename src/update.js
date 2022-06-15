@@ -4,18 +4,14 @@ import parse from './parser.js';
 import saveRSS from './saver.js';
 
 const updateFeeds = (watchedState, i18nextInstance) => {
-  // watchedState.feeds.forEach((feed) => {
-  //   const proxifiedUrl = proxify(feed.url);
-  //   axios.get(proxifiedUrl).then((response) => {
-  //     const RSS = parse(response.data.contents, i18nextInstance);
-  //     saveRSS(RSS, feed.url, watchedState);
-  //   });
-  // });
-  watchedState.feeds.forEach((feed) => {
+  const promises = watchedState.feeds.map((feed) => {
     const proxifiedUrl = proxify(feed.url);
-    axios.get(proxifiedUrl).then((response) => {
+    return axios.get(proxifiedUrl);
+  });
+  Promise.all(promises).then((responses) => {
+    responses.forEach((response) => {
       const RSS = parse(response.data.contents, i18nextInstance);
-      saveRSS(RSS, feed.url, watchedState);
+      saveRSS(RSS, watchedState);
     });
   });
 };

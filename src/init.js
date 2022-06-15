@@ -69,7 +69,7 @@ const initApp = () => {
       .then((response) => {
         watchedState.ui.status = 'valid';
         const parsedRSS = parse(response.data.contents, i18nextInstance);
-        saveRSS(parsedRSS, url, watchedState);
+        saveRSS(parsedRSS, watchedState);
         watchedState.ui.status = 'success';
         watchedState.ui.feedback = 'success';
         input.value = '';

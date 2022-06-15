@@ -1,14 +1,14 @@
 import uniqueId from 'lodash/uniqueId.js';
 
-const saveRSS = (RSS, url, watchedState) => {
-  const existingFeed = watchedState.feeds.find((feed) => feed.url === url);
+const saveRSS = (RSS, watchedState) => {
+  const existingFeed = watchedState.feeds.find((feed) => feed.url === RSS.link);
   let existingPosts = [];
   let feedId;
   if (!existingFeed) {
     feedId = uniqueId();
     watchedState.feeds.push({
       id: feedId,
-      url,
+      url: RSS.link,
       title: RSS.title,
       description: RSS.description,
     });
