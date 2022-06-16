@@ -3,8 +3,9 @@ const parser = new DOMParser();
 const parse = (xmlString) => {
   const parsedString = parser.parseFromString(xmlString, 'application/xml');
   const parserError = parsedString.querySelector('parsererror');
+  console.log(parsedString)
   if (parserError) {
-    const error = new Error('parsingError');
+    const error = new Error(`parsingError: ${parserError.textContent}`);
     error.isParsingError = true;
     throw error;
   }
